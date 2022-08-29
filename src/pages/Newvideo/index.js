@@ -5,6 +5,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import styles from "./index.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { NewvideoApi } from "../../request/api";
 
 const { Option } = Select;
 const layout = {
@@ -47,7 +48,7 @@ export default function Newvideo() {
 
   const props = {
     name: "file",
-    action: "http://10.2.13.116:8088/uploadFile",
+    action: "https://cee6-123-185-223-64.ap.ngrok.io/uploadFile",
     onChange(info) {
       // console.log(info);
       if (info.file.status !== "uploading") {
@@ -70,24 +71,29 @@ export default function Newvideo() {
     accept: ".flv,.f4v,.mp4,.ogv,.webm,.mpeg,.mpg",
   };
   const onFinish = (values) => {
-    console.log(values);
-    console.log(firsttype);
-    console.log(secondtype);
-    axios({
-      method: "post",
-      url: "http://10.2.13.116:8088/my/addvideo",
-      data: {
-        title: values.title,
-        video_type: firsttype,
-        video_type_classify: secondtype,
-        author: values.author,
-        video_introduce: values.intro,
-        video_url: path,
-      },
-      headers: {
-        authorization: managertokenstr,
-      },
+    NewvideoApi({
+      title: values.title,
+      video_type: firsttype,
+      video_type_classify: secondtype,
+      author: values.author,
+      video_introduce: values.intro,
+      video_url: path,
     })
+      // axios({
+      //   method: "post",
+      //   url: "http://10.2.13.116:8088/my/addvideo",
+      //   data: {
+      //     title: values.title,
+      //     video_type: firsttype,
+      //     video_type_classify: secondtype,
+      //     author: values.author,
+      //     video_introduce: values.intro,
+      //     video_url: path,
+      //   },
+      //   headers: {
+      //     authorization: managertokenstr,
+      //   },
+      // })
       .then((res) => {
         message.success("创建课程成功！！");
         setTimeout(() => {

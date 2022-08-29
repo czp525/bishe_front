@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./index.module.css";
 import { SearcharticleApi } from "../../request/api";
+import { GetarticleApi } from "../../request/api";
 
 // const managerstr = localStorage.getItem("managerdata");
 // const manager = JSON.parse(managerstr);
@@ -33,22 +34,19 @@ export default function Articlemanage() {
   const [total, setTotal] = useState(0);
   const getData = (c) => {
     // console.log(c);
-    axios({
-      method: "get",
-      url: "http://10.2.13.116:8088/my/artcate/getpage",
-      params: { current: c },
-      headers: {
-        authorization: managertokenstr,
-      },
-    })
+    GetarticleApi({ current: c })
+      // axios({
+      //   method: "get",
+      //   url: "https://cee6-123-185-223-64.ap.ngrok.io/my/article/articles",
+      //   params: { current: c },
+      //   headers: {
+      //     authorization: managertokenstr,
+      //   },
+      // })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setdata(res.data.data);
-        // console.log(res.data.total);
         setTotal(res.data.total);
-        // setCurrent(current);
-        // console.log(data);
-        // console.log(total);
       })
       .catch((err) => {});
   };
@@ -60,7 +58,7 @@ export default function Articlemanage() {
     if (window.confirm("确定要删除吗")) {
       axios({
         method: "get",
-        url: `http://10.2.13.116:8088/my/artcate/deletecate/${d_id}`,
+        url: `https://cee6-123-185-223-64.ap.ngrok.io/my/article/deletearticle/${d_id}`,
         headers: {
           authorization: managertokenstr,
         },
@@ -78,7 +76,7 @@ export default function Articlemanage() {
     const e_id = e.article_id;
     axios({
       method: "get",
-      url: `http://10.2.13.116:8088/my/artcate/changearticle/${e_id}`,
+      url: `https://cee6-123-185-223-64.ap.ngrok.io/my/article/changearticle/${e_id}`,
       data: {
         article_id: e_id,
       },

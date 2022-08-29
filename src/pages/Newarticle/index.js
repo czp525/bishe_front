@@ -8,6 +8,7 @@ import "react-markdown-editor-lite/lib/index.css";
 import { Button, Form, Input, Select, message } from "antd";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
+import { NewarticleApi } from "../../request/api";
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -58,22 +59,31 @@ export default function Test() {
 
   const onFinish = (values) => {
     console.log(values);
-    axios({
-      method: "post",
-      url: "http://10.2.13.116:8088/my/artcate/addcates",
-      data: {
-        title: values.title,
-        article_type: firsttype,
-        article_type_classify: secondtype,
-        author: values.author,
-        article_introduce: values.intro,
-        article_text: text,
-        article_html: html,
-      },
-      headers: {
-        authorization: managertokenstr,
-      },
+    NewarticleApi({
+      title: values.title,
+      article_type: firsttype,
+      article_type_classify: secondtype,
+      author: values.author,
+      article_introduce: values.intro,
+      article_text: text,
+      article_html: html,
     })
+      // axios({
+      //   method: "post",
+      //   url: "http://10.2.13.116:8088/my/artcate/addcates",
+      //   data: {
+      //     title: values.title,
+      //     article_type: firsttype,
+      //     article_type_classify: secondtype,
+      //     author: values.author,
+      //     article_introduce: values.intro,
+      //     article_text: text,
+      //     article_html: html,
+      //   },
+      //   headers: {
+      //     authorization: managertokenstr,
+      //   },
+      // })
       .then((res) => {
         message.success("创建课程成功！！");
         setTimeout(() => {

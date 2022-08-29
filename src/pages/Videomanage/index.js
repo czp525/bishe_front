@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./index.module.css";
 import { SearchvideoApi } from "../../request/api";
+import { GetvideoApi } from "../../request/api";
 // const manager = JSON.parse(managerstr);
 // const managertokenstr = localStorage.getItem("managertoken");
 // console.log(manager);
@@ -16,21 +17,22 @@ export default function Articlemanage() {
   const navigate = useNavigate();
   const { Search } = Input;
   const onSearch = (value) => {
-    // axios({
-    //   method: "post",
-    //   url: "http://10.2.13.116:8088/my/search1",
-    //   headers: {
-    //     authorization: managertokenstr,
-    //   },
-    //   data: {
-    //     value: value,
-    //   },
-    // })
-    //   .then((res) => {
-    //     setTotal(res.data.total);
-    //     setdata(res.data.data);
-    //   })
-    //   .catch((err) => {});
+    SearchvideoApi({ value: value })
+      // axios({
+      //   method: "post",
+      //   url: "http://10.2.13.116:8088/my/search1",
+      //   headers: {
+      //     authorization: managertokenstr,
+      //   },
+      //   data: {
+      //     value: value,
+      //   },
+      // })
+      .then((res) => {
+        setTotal(res.data.total);
+        setdata(res.data.data);
+      })
+      .catch((err) => {});
   }; //搜索框内容
   const newVideo = () => {
     navigate("/newvideo");
@@ -40,18 +42,20 @@ export default function Articlemanage() {
   const [total, setTotal] = useState(0);
   const getData = (c) => {
     // console.log(c);
-    axios({
-      method: "get",
-      url: "http://10.2.13.116:8088/my/getpage1",
-      params: { current: c },
-      headers: {
-        authorization: managertokenstr,
-      },
-    }).then((res) => {
-      setdata(res.data.data);
-      setTotal(res.data.total);
-      // console.log(total);
-    });
+    GetvideoApi({ current: c })
+      // axios({
+      //   method: "get",
+      //   url: "http://10.2.13.116:8088/my/getpage1",
+      //   params: { current: c },
+      //   headers: {
+      //     authorization: managertokenstr,
+      //   },
+      // })
+      .then((res) => {
+        setdata(res.data.data);
+        setTotal(res.data.total);
+        // console.log(total);
+      });
     // .catch((err) => {});
   };
   useEffect(() => {
@@ -62,7 +66,7 @@ export default function Articlemanage() {
     if (window.confirm("确定要删除吗")) {
       axios({
         method: "get",
-        url: `http://10.2.13.116:8088/my/delete/${d_id}`,
+        url: `https://cee6-123-185-223-64.ap.ngrok.io/my/video/delete/${d_id}`,
         headers: {
           authorization: managertokenstr,
         },
@@ -80,7 +84,7 @@ export default function Articlemanage() {
     const e_id = e.video_id;
     axios({
       method: "get",
-      url: `http://10.2.13.116:8088/my/changevideo1/${e_id}`,
+      url: `https://cee6-123-185-223-64.ap.ngrok.io/my/video/changevideo1/${e_id}`,
       data: {
         video_id: e_id,
       },

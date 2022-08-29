@@ -28,4 +28,19 @@ export const SearchvideoApi = (params) =>
   request.post("/my/video/search1", params);
 
 //编辑个人信息接口
-export const PersonalApi = (params) => request.post("/my/userinfo", params);
+export const PersonalApi = (params) =>
+  request.post("/my/updateuserinfo", params);
+
+//获取文章数据
+export const GetarticleApi = (params) =>
+  request.get("/my/article/getpage", { params });
+
+//新建文章接口
+export const NewarticleApi = (params) =>
+  request.post("/my/article/addarticle", params);
+//新建视频接口
+export const NewvideoApi = (params) =>
+  request.post("/my/video/addvideo", params);
+//获取视频数据
+export const GetvideoApi = (params) =>
+  request.get("/my/video/getpage1", { params });

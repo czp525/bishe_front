@@ -32,6 +32,7 @@ const managertokenstr = localStorage.getItem("managertoken");
 export default function Editvideo() {
   const location = useLocation();
   const { state } = location;
+  console.log(state);
   const navigate = useNavigate();
 
   const [path, setPath] = useState(state.video_url);
@@ -53,7 +54,7 @@ export default function Editvideo() {
   };
   const props = {
     name: "file",
-    action: "http://10.2.13.116:8088/uploadFile",
+    action: "https://cee6-123-185-223-64.ap.ngrok.io/uploadFile",
     onChange(info) {
       if (info.file.status !== "uploading") {
       }
@@ -93,10 +94,7 @@ export default function Editvideo() {
         </Form.Item>
 
         <Form.Item name={"videopre"} label="视频预览">
-          <video
-            src={getVideoPath("file-1661302588872-889118897.mp4")}
-            controls
-          ></video>
+          <video src={getVideoPath(state.video_url)} controls></video>
         </Form.Item>
         <Form.Item name={"video"} label="视频">
           <Upload {...props}>
