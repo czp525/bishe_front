@@ -1,0 +1,11 @@
+.carousel {
+  width: 800px;
+  height: 500px;
+  overflow: hidden;
+  margin: 50px auto;
+  border-radius: 4%;
+}
+.carouselcontainer{
+  display: flex; 
+  margin: auto;
+}

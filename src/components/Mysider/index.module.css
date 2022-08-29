@@ -1,0 +1,7 @@
+
+/* 侧边栏样式 */
+.sidermenu {
+  height: auto;
+  background-color: #fff;
+    box-shadow:2px 2px 5px grey;
+}
