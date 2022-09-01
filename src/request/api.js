@@ -54,3 +54,5 @@ export const GetvideoApi = (params) =>
     export const GetalApi = () => request.get("/my/article/articlelist");
     //视频排行榜
     export const GetvlApi = () => request.get("/my/video/videolist");
+    //用户搜索
+export const SearchApi = (params) => request.post("/my/usersearch", params);

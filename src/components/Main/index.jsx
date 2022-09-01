@@ -35,16 +35,10 @@ export default function Main() {
   };
   const listinit = () => {
     GetalApi().then((res) => {
-      res.data.data.map((item) => {
-        setArticledata(item.title);
-      });
+      setArticledata(res.data.data);
     });
     GetvlApi().then((res) => {
-      res.data.data.map((item) => {
-        setVideodata(item.title);
-      });
-      console.log(videodata);
-      // setVideodata(res.data.data);
+      setVideodata(res.data.data);
     });
   };
   useEffect(() => {
@@ -54,14 +48,14 @@ export default function Main() {
   }, []);
   return (
     <div>
-      <div style={{ display: "flex" }}>
+      <div className={styles.box} style={{ display: "flex" }}>
         <div className={styles.lesson}>
           <div>
             <Button type="link" style={{ fontSize: "25px" }}>
               文章课程{" >"}
             </Button>
           </div>
-          {articlesrc > 0 && (
+          {articlesrc.length > 0 && (
             <div className={styles.classimg}>
               <img src={articlesrc[0].article_pic} alt="" />
               <img src={articlesrc[1].article_pic} alt="" />
@@ -71,24 +65,25 @@ export default function Main() {
           )}
         </div>
         <div className="charts">
-          <p style={{ fontSize: "20px", color: "coral", marginLeft: "10px" }}>
+          <p style={{ fontSize: "20px", color: "coral", marginLeft: "15px" }}>
             文章课程排行榜
           </p>
           <List
             bordered
             dataSource={articledata}
-            renderItem={(item) => <List.Item>{item}</List.Item>}
+            renderItem={(item) => <List.Item>{item.title}</List.Item>}
+            style={{ marginLeft: "15px" }}
           />
         </div>
       </div>
-      <div style={{ display: "flex" }}>
+      <div className={styles.box} style={{ display: "flex" }}>
         <div className={styles.lesson}>
           <div>
             <Button type="link" style={{ fontSize: "25px" }}>
               视频课程{" >"}
             </Button>
           </div>
-          {videosrc > 0 && (
+          {videosrc.length > 0 && (
             <div className={styles.classimg}>
               <img src={videosrc[0].video_pic} alt="" />
               <img src={videosrc[1].video_pic} alt="" />
@@ -98,13 +93,14 @@ export default function Main() {
           )}
         </div>
         <div className="charts">
-          <p style={{ fontSize: "20px", color: "coral", marginLeft: "10px" }}>
+          <p style={{ fontSize: "20px", color: "coral", marginLeft: "15px" }}>
             视频课程排行榜
           </p>
           <List
             bordered
             dataSource={videodata}
-            renderItem={(item) => <List.Item>{item}</List.Item>}
+            renderItem={(item) => <List.Item>{item.title}</List.Item>}
+            style={{ marginLeft: "15px" }}
           />
         </div>
       </div>

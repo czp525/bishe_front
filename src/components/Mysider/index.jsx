@@ -1,11 +1,9 @@
 import {
   ContainerOutlined,
   DesktopOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   PieChartOutlined,
 } from "@ant-design/icons";
-import { Button, Menu } from "antd";
+import { Menu } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";

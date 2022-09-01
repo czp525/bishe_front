@@ -4,12 +4,18 @@ import { Dropdown, Menu, Space, Layout, Input, Avatar } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 // import "../assets/base.css";
 import styles from "./index.module.css";
+import { SearchApi } from "../../request/api";
 
 export default function Myheader() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { Search } = Input;
   const { Header } = Layout;
-  const onSearch = (value) => console.log(value); //搜索框内容
+  const onSearch = (value) => {
+    if (location.pathname !== "/result") {
+      navigate("/result", { state: value });
+    }
+  }; //搜索框内容
 
   const userstr = localStorage.getItem("userdata");
   let user = JSON.parse(userstr); //从localstorage获得user对象

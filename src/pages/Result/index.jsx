@@ -1,5 +1,79 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import styles from "./index.module.css";
+import "../../assets/base.css";
+import Myheader from "../../components/Myheader/index";
+import { Pagination, List } from "antd";
+import { useNavigate, useLocation } from "react-router-dom";
+import { SearchApi } from "../../request/api";
 
+// const data = [
+//   {
+//     title: "Ant Design Title 1",
+//   },
+//   {
+//     title: "Ant Design Title 2",
+//   },
+//   {
+//     title: "Ant Design Title 3",
+//   },
+//   {
+//     title: "Ant Design Title 4",
+//   },
+// ];
 export default function Result() {
-  return <div>index</div>;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { state } = location;
+  const [data, setdata] = useState([]);
+
+  const [current, setCurrent] = useState(0);
+  const [total, setTotal] = useState(0);
+  const pageChange = (c) => {
+    setCurrent(c);
+    getData(c);
+  };
+  const getData = (c) => {
+    SearchApi({ value: state, current: c })
+      .then((res) => {
+        let a = [...res.data.data, ...res.data.data1];
+        console.log(a);
+        setdata(a);
+        setTotal(res.data.total);
+      })
+      .catch((err) => {});
+  };
+  useEffect(() => {
+    getData(1);
+  }, []);
+  return (
+    <div id="page">
+      <Myheader></Myheader>
+      <List
+        itemLayout="horizontal"
+        dataSource={data}
+        renderItem={(item) => (
+          <List.Item>
+            <List.Item.Meta
+              avatar={<img src="https://joeschmoe.io/api/v1/random" alt="" />}
+              title={<a href="https://ant.design">{item.title}</a>}
+              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+            />
+          </List.Item>
+        )}
+      />
+      <Pagination
+        current={current}
+        style={{ marginTop: "20px" }}
+        defaultCurrent={1}
+        // pageSize={state.pageSize}
+        defaultPageSize={10}
+        pageSizeOptions={[5, 10, 15]}
+        total={total}
+        // showSizeChanger
+        showQuickJumper
+        onChange={pageChange}
+        showTotal={(total) => `共 ${total} 条数据`}
+      />
+    </div>
+  );
 }

@@ -15,6 +15,7 @@ import Newarticle from "../pages/Newarticle/index";
 import Newvideo from "../pages/Newvideo/index";
 import Editarticle from "../pages/Editarticle/index";
 import Editvideo from "../pages/Editvideo/index";
+import Result from "../pages/Result/index";
 
 // import Forgetpassword from "../pages/Forgetpassword/Forgetpassword";
 
@@ -42,6 +43,7 @@ const BaseRouter = () => (
       <Route path="/newvideo" element={<Newvideo />}></Route>
       <Route path="/editarticle" element={<Editarticle />}></Route>
       <Route path="/editvideo" element={<Editvideo />}></Route>
+      <Route path="/result" element={<Result />}></Route>
     </Routes>
   </Router>
 );
