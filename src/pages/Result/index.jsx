@@ -38,6 +38,7 @@ export default function Result() {
         let a = [...res.data.data, ...res.data.data1];
         console.log(a);
         setdata(a);
+        console.log(data);
         setTotal(res.data.total);
       })
       .catch((err) => {});
@@ -54,9 +55,9 @@ export default function Result() {
         renderItem={(item) => (
           <List.Item>
             <List.Item.Meta
-              avatar={<img src="https://joeschmoe.io/api/v1/random" alt="" />}
-              title={<a href="https://ant.design">{item.title}</a>}
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+              avatar={<img src={item.video_pic} alt="" />}
+              title={<a href=" ">{item.title}</a>}
+              description={item.author}
             />
           </List.Item>
         )}

@@ -44,15 +44,37 @@ export const NewvideoApi = (params) =>
 //获取视频数据
 export const GetvideoApi = (params) =>
   request.get("/my/video/getpage1", { params });
-  //获取随机文章课程封面
-  export const GetrandarticleApi = () => request.get("/my/article/randarticle");
+//获取随机文章课程封面
+export const GetrandarticleApi = () => request.get("/my/article/randarticle");
 //获取随机视频文章封面
-    export const GetrandvideoApi = () => request.get("/my/video/randvideo");
-    //获取轮播图对应的封面
-    export const GetrandimgApi = () => request.get("/my/randindex");
-    //文章排行榜
-    export const GetalApi = () => request.get("/my/article/articlelist");
-    //视频排行榜
-    export const GetvlApi = () => request.get("/my/video/videolist");
-    //用户搜索
+export const GetrandvideoApi = () => request.get("/my/video/randvideo");
+//获取轮播图对应的封面
+export const GetrandimgApi = () => request.get("/my/randindex");
+//文章排行榜
+export const GetalApi = () => request.get("/my/article/articlelist");
+//视频排行榜
+export const GetvlApi = () => request.get("/my/video/videolist");
+//用户搜索
 export const SearchApi = (params) => request.post("/my/usersearch", params);
+//提交视频评论
+export const AddvideocommentApi = (params) =>
+  request.post("/my/video/addvideocomment", params);
+//提交文章评论
+export const AddarticlecommentApi = (params) =>
+  request.post("/my/article/addarticlecomment", params);
+  //获取视频评论
+export const GetvideocommentApi = (params) =>
+  request.post("/my/video/getvideocomment",params);
+
+//获取文章评论
+export const GetarticlecommentApi = (params) =>
+  request.post("/my/article/getarticlecomment", params);
+  //保存视频进度
+export const VideoprogressApi = (params) =>
+  request.post("/my/video/duration", params);
+  //获取视频进度
+export const GetvideodurationApi = (params) =>
+  request.get("/my/video/updateduration", { params });
+//保存文章进度
+  export const ArticleprogressApi = (params) =>
+    request.post("/my/article/duration1", params);

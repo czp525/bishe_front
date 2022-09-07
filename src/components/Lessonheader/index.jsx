@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import styles from "./index.module.css";
 
 export default function Lessonheader() {
   const navigate = useNavigate();
@@ -14,8 +15,10 @@ export default function Lessonheader() {
     navigate("/training");
   };
   return (
-    <div className="lessonheader">
-      <img src="../icon.png" className="icon"></img>
+    <div className={styles.lessonheader}>
+      <div>
+        <img src="../icon.png" className={styles.icon} alt=""></img>
+      </div>
       <div>
         <Button
           type="link"

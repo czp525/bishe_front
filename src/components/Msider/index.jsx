@@ -21,6 +21,8 @@ const items = [
   getItem("课程管理", "sub1", <MailOutlined />, [
     getItem("文章课程管理", "articlemanage"),
     getItem("视频课程管理", "videomanage"),
+    getItem("查看视频进度", "videoprogress"),
+    getItem("查看文章进度", "articleprogress"),
   ]),
   getItem("训练营管理", "trainingmanage", <PieChartOutlined />),
 ];

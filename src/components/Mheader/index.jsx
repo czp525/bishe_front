@@ -17,7 +17,9 @@ export default function Mheader() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <img src="../icon.png" className={styles.icon}></img>
+      <div>
+        <img src="../icon.png" className={styles.icon}></img>
+      </div>
     </Header>
   );
 }

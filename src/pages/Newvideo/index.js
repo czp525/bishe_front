@@ -48,7 +48,7 @@ export default function Newvideo() {
 
   const props = {
     name: "file",
-    action: "https://cee6-123-185-223-64.ap.ngrok.io/uploadFile",
+    action: "https://b94a-123-185-222-223.jp.ngrok.io/uploadFile",
     onChange(info) {
       // console.log(info);
       if (info.file.status !== "uploading") {

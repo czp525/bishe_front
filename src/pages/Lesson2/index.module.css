@@ -1,0 +1,13 @@
+#page {
+  width: 75vw;
+  height: 100vh;
+  margin: auto;
+  background-color: #fff;
+}
+.video {
+text-align: center;
+}
+.controls{
+  width: 1000px;
+  height: 600px;
+}

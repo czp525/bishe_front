@@ -66,7 +66,7 @@ export default function Articlemanage() {
     if (window.confirm("确定要删除吗")) {
       axios({
         method: "get",
-        url: `https://cee6-123-185-223-64.ap.ngrok.io/my/video/delete/${d_id}`,
+        url: `https://b94a-123-185-222-223.jp.ngrok.io/my/video/delete/${d_id}`,
         headers: {
           authorization: managertokenstr,
         },
@@ -84,7 +84,7 @@ export default function Articlemanage() {
     const e_id = e.video_id;
     axios({
       method: "get",
-      url: `https://cee6-123-185-223-64.ap.ngrok.io/my/video/changevideo1/${e_id}`,
+      url: `https://b94a-123-185-222-223.jp.ngrok.io/my/video/changevideo1/${e_id}`,
       data: {
         video_id: e_id,
       },
