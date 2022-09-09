@@ -30,9 +30,9 @@ export default function Videoprogress() {
         <Divider />
         <Table dataSource={data} pagination={false} rowKey={"username"}>
           <Column title="用户名" dataIndex="username" key="username" />
-          <Column title="课程ID" dataIndex="video_id" key="video_id" />
-          <Column title="当前进度" dataIndex="curprocess" key="curprocess" />
-          <Column title="总进度" dataIndex="process" key="process" />
+          <Column title="题目" dataIndex="title" key="title" />
+          <Column title="当前进度" dataIndex="propercent" key="propercent" />
+          <Column title="更新时间" dataIndex="date" key="date" />
         </Table>
         <Pagination
           current={current}

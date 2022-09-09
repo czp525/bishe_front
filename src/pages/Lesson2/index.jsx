@@ -12,7 +12,11 @@ import {
 import { Comment, Divider, message } from "antd";
 
 import { Button, Form, Input, List } from "antd";
-import { DeleteOutlined, EnterOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EnterOutlined,
+  HighlightOutlined,
+} from "@ant-design/icons";
 import dayjs from "dayjs";
 
 const layout = {
@@ -35,19 +39,7 @@ const validateMessages = {
     range: "${label} must be between ${min} and ${max}",
   },
 };
-let actions = [
-  <Button type="link" size={"small"} onClick={() => {}}>
-    <EnterOutlined />
-    回复
-  </Button>,
-  <span
-    onClick={() => {
-      // this.props.removeItem(index);
-    }}
-  >
-    <DeleteOutlined /> 删除
-  </span>,
-];
+
 /* eslint-enable no-template-curly-in-string */
 
 // const { TextArea } = Input;
@@ -112,6 +104,7 @@ let actions = [
 
 export default function Lesson2() {
   const [data, setData] = useState([]);
+  const [reply, setReply] = useState();
   const [videomessage, setVideomessage] = useState({});
   const location = useLocation();
   const { state } = location;
@@ -130,6 +123,36 @@ export default function Lesson2() {
   // console.log(userstr);
   let user = JSON.parse(userstr);
   // console.log(user);
+  const doreply = () => {
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+  const [form] = Form.useForm();
+  const replyto = (nickname) => {
+    form.resetFields();
+    form.setFieldsValue({ video_comment: `@${nickname}` });
+    if (formlist) {
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  };
+  let actions = (index, nickname) => [
+    <Button
+      type="link"
+      size={"small"}
+      onClick={() => {
+        replyto(nickname);
+      }}
+    >
+      <EnterOutlined />
+      回复
+    </Button>,
+    <span
+      onClick={() => {
+        // this.props.removeItem(index);
+      }}
+    >
+      <DeleteOutlined /> 删除
+    </span>,
+  ];
 
   //获取评论
   const init = () => {
@@ -138,6 +161,8 @@ export default function Lesson2() {
         // console.log(res);
         setData(res.data.data);
         // console.log(data);
+        form.resetFields();
+        setReply();
       })
       .catch((err) => {});
   };
@@ -215,23 +240,9 @@ export default function Lesson2() {
   };
 
   //保存进度
-  // useEffect(() => {
-  //   const a = document.getElementById("x");
-  //   setNode(a);
-  // });
-
-  // const a = document.getElementById("x");
-  // console.log(a);
-  // console.log(video);
-  // const canpaly = () => {
-  //   setDuration(a.duration);
-  //   console.log(duration);
-  // };
   const video = useRef();
   const videoinfo = useRef();
-  // setTimeout(() => {
-  //   console.log(video.current.duration);
-  // }, 5000);
+
   useEffect(() => {
     const a = setInterval(() => {
       const obj = {
@@ -279,53 +290,21 @@ export default function Lesson2() {
         <br />
         {state.video_introduce}
       </div>
-      <Divider />
-      {/* 
-      <>
-        {comments.length > 0 && <CommentList comments={comments} />}
-        <Comment
-          avatar={
-            <Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />
-          }
-          content={
-            <Editor
-              onChange={handleChange}
-              onSubmit={handleSubmit}
-              submitting={submitting}
-              value={value}
-            />
-          }
-        />
-      </> */}
-
-      <Form
-        {...layout}
-        name="nest-messages"
-        ref={formlist}
-        onFinish={onFinish}
-        validateMessages={validateMessages}
-      >
-        <Form.Item name={["video_comment"]} label="评论">
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
-          <Button type="primary" htmlType="submit">
-            发布
-          </Button>
-        </Form.Item>
-      </Form>
 
       <Divider />
-
+      <Button type="primary" onClick={doreply}>
+        <HighlightOutlined />
+        点击评论
+      </Button>
       <List
         className="comment-list"
         header={`共${data.length} 条评论`}
         itemLayout="horizontal"
         dataSource={data}
-        renderItem={(item) => (
+        renderItem={(item, index) => (
           <li>
             <Comment
-              actions={actions}
+              actions={actions(index, item.nickname)}
               author={item.nickname}
               avatar={item.imgurl}
               content={item.video_comment}
@@ -336,6 +315,25 @@ export default function Lesson2() {
           </li>
         )}
       />
+
+      <Form
+        {...layout}
+        name="nest-messages"
+        ref={formlist}
+        onFinish={onFinish}
+        validateMessages={validateMessages}
+        initialValues={reply}
+        form={form}
+      >
+        <Form.Item name={["video_comment"]} label="评论">
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
+          <Button type="primary" htmlType="submit">
+            发布
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 }

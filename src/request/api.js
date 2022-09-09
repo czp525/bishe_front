@@ -78,3 +78,8 @@ export const GetvideodurationApi = (params) =>
 //保存文章进度
   export const ArticleprogressApi = (params) =>
     request.post("/my/article/duration1", params);
+      //获取文章进度
+export const GetarticledurationApi = (params) =>
+  request.get("/my/article/updateduration1", { params });
+  //获取帖子
+export const GetforumApi = (params) => request.get("/my/forum/getpage", {params});

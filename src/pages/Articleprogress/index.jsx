@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import { Divider, Table, Pagination } from "antd";
-import { GetvideodurationApi } from "../../request/api";
+import { GetarticledurationApi } from "../../request/api";
 
 const { Column } = Table;
 export default function Articleprogress() {
@@ -9,7 +9,7 @@ export default function Articleprogress() {
   const [current, setCurrent] = useState(0);
   const [total, setTotal] = useState(0);
   const getData = (c) => {
-    GetvideodurationApi({ current: c })
+    GetarticledurationApi({ current: c })
       .then((res) => {
         console.log(res);
         setdata(res.data.data);
@@ -28,18 +28,11 @@ export default function Articleprogress() {
     <div>
       <div className={styles.mcontent}>
         <Divider />
-        <Table dataSource={data} pagination={false} rowKey={"video_id"}>
-          <Column title="ID" dataIndex="video_id" key="ID" />
-          <Column title="标题" dataIndex="title" key="title" />
-
-          <Column title="作者" dataIndex="author" key="author" />
-          <Column title="修改时间" dataIndex="video_date" key="time" />
-          <Column
-            title="简介"
-            dataIndex="video_introduce"
-            key="Introduction"
-            ellipsis="true"
-          />
+        <Table dataSource={data} pagination={false} rowKey={"username"}>
+          <Column title="用户名" dataIndex="username" key="username" />
+          <Column title="课程题目" dataIndex="title" key="title" />
+          <Column title="当前进度" dataIndex="propercent" key="propercent" />
+          <Column title="更新时间" dataIndex="date" key="date" />
         </Table>
         <Pagination
           current={current}

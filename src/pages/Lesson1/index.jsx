@@ -9,7 +9,11 @@ import {
   ArticleprogressApi,
 } from "../../request/api";
 import { Button, Form, Input, message, List, Comment } from "antd";
-import { DeleteOutlined, EnterOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EnterOutlined,
+  HighlightOutlined,
+} from "@ant-design/icons";
 import dayjs from "dayjs";
 
 const layout = {
@@ -34,28 +38,43 @@ const validateMessages = {
 };
 
 export default function Lesson1() {
-  const [videomessage, setVideomessage] = useState({});
-
+  const [cur, setCur] = useState();
   const [data, setData] = useState([]);
+  const [reply, setReply] = useState();
   const location = useLocation();
   const { state } = location;
   const userstr = localStorage.getItem("userdata");
   let user = JSON.parse(userstr);
-  let actions = [
+
+  const doreply = () => {
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+  const [form] = Form.useForm();
+  const replyto = (nickname) => {
+    form.resetFields();
+    form.setFieldsValue({ article_comment: `@${nickname}` });
+    // setReply({ article_comment: `@${nickname}` });
+    if (formlist) {
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  };
+  // const removeItem = (index) => {
+  //   comment.removeChild(comment.childNodes[index]);
+  // };
+  let actions = (index, nickname) => [
     <Button
-      //styles={{marginLeft:'500px'}}
       type="link"
       size={"small"}
-      // title="回复"
-      // icon="form"
-      // onClick={this.onClickReply}
+      onClick={() => {
+        replyto(nickname);
+      }}
     >
       <EnterOutlined />
       回复
     </Button>,
     <span
       onClick={() => {
-        // this.props.removeItem(index);
+        // removeItem(index);
       }}
     >
       <DeleteOutlined /> 删除
@@ -66,6 +85,8 @@ export default function Lesson1() {
       .then((res) => {
         console.log(res);
         setData(res.data.data);
+        form.resetFields();
+        setReply();
       })
       .catch((err) => {});
   };
@@ -75,6 +96,7 @@ export default function Lesson1() {
   const formlist = useRef();
 
   const onFinish = (values) => {
+    console.log(values);
     AddarticlecommentApi({
       ...values,
       article_id: state.article_id,
@@ -90,48 +112,31 @@ export default function Lesson1() {
     // console.log(values);
   };
 
-  const logscroll = (e) => {
-    console.log(e);
-  };
-  // const article = useRef();
-  // console.log(article);
-  // const logscroll = (e) => {
-  //   console.log(e.target.scrollTop);
-  // };
-  // article.current.onscroll = logscroll;
-
-  // .addEventListener(
-  //   "scroll",
-  //   () => {
-  //     console.log("scroll ...");
-  //   },
-  //   true
-  // );
-
-  //  useEffect(() => {
-  //    const a = setInterval(() => {
-  //      const obj = {
-  //        process: video.current?.duration,
-  //        curprocess: video.current?.currentTime,
-  //        video_id: state.video_id,
-  //        username: user.username,
-  //      };
-  //      videoinfo.current = obj;
-  //      setVideomessage(obj);
-  //    }, 1000);
-  //    return () => {
-  //      clearInterval(a);
-  //    };
-  //  }, [videomessage]);
-  //  useEffect(() => {
-  //    return () => {
-  //      ArticleprogressApi(videoinfo.current)
-  //        .then((res) => {
-  //          console.log(res);
-  //        })
-  //        .catch((err) => {});
-  //    };
-  //  }, []);
+  useEffect(() => {
+    const a = setInterval(() => {
+      const a = document.documentElement.scrollTop;
+      setCur(a);
+      // console.log(cur);
+    }, 1000);
+    return () => {
+      clearInterval(a);
+    };
+  }, [cur]);
+  useEffect(() => {
+    const p = document.body.scrollHeight;
+    return () => {
+      ArticleprogressApi({
+        username: user.username,
+        process: p,
+        curprocess: cur,
+        article_id: state.article_id,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {});
+    };
+  }, [cur]);
 
   return (
     <div id={styles.page}>
@@ -141,9 +146,32 @@ export default function Lesson1() {
       <Divider />
       <div
         dangerouslySetInnerHTML={{ __html: state.article_html }}
-        // ref={article}
-        onScroll={logscroll}
+        // onScroll={logscroll}
       ></div>
+
+      <Divider />
+      <Button type="primary" onClick={doreply}>
+        <HighlightOutlined />
+        点击评论
+      </Button>
+      <List
+        className="comment-list"
+        header={`共${data.length} 条评论`}
+        itemLayout="horizontal"
+        dataSource={data}
+        renderItem={(item, index) => (
+          <li>
+            <Comment
+              actions={actions(index, item.nickname)}
+              author={item.nickname}
+              avatar={item.imgurl}
+              content={item.article_comment}
+              datetime={dayjs(item.date).format("YYYY-MM-DD HH:mm:ss")}
+            />
+            <Divider />
+          </li>
+        )}
+      />
       <Divider />
       <Form
         {...layout}
@@ -151,6 +179,8 @@ export default function Lesson1() {
         ref={formlist}
         onFinish={onFinish}
         validateMessages={validateMessages}
+        initialValues={reply}
+        form={form}
       >
         <Form.Item name={["article_comment"]} label="评论">
           <Input.TextArea />
@@ -161,26 +191,6 @@ export default function Lesson1() {
           </Button>
         </Form.Item>
       </Form>
-
-      <Divider />
-      <List
-        className="comment-list"
-        header={`共${data.length} 条评论`}
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item, index) => (
-          <li>
-            <Comment
-              actions={actions}
-              author={item.nickname}
-              avatar={item.imgurl}
-              content={item.article_comment}
-              datetime={dayjs(item.date).format("YYYY-MM-DD HH:mm:ss")}
-            />
-            <Divider />
-          </li>
-        )}
-      />
     </div>
   );
 }
