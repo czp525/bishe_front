@@ -14,6 +14,12 @@ export default function Mybreadcrumb() {
       case "/manage/videomanage":
         setbread("视频课程管理");
         break;
+      case "/manage/videoprogress":
+        setbread("查看视频进度");
+        break;
+      case "/manage/articleprogress":
+        setbread("查看文章进度");
+        break;
       case "/manage/trainingmanage":
         setbread("训练营管理");
         break;

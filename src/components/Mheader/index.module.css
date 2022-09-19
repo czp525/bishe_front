@@ -6,6 +6,7 @@
   height: 120px;
   background-color: #fff;
   padding: 0;
+    box-shadow:2px 2px 5px grey;
 }
 .icon {
   width: 140px;

@@ -1,59 +1,70 @@
 import React, { useState, useEffect } from "react";
-import { Pagination, List, Tag, Button } from "antd";
 import styles from "./index.module.css";
-import { GetarticleApi } from "../../request/api";
+import Trainingheader from "../../components/Trainingheader";
+import { Pagination, List, Tag, Button } from "antd";
+import { GetexamApi, GetquestionApi } from "../../request/api";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
-export default function Videolesson() {
+export default function Training() {
+  const [current, setCurrent] = useState(0);
+  const [total, setTotal] = useState(0);
   const [data, setdata] = useState([]);
   const navigate = useNavigate();
 
-  const [current, setCurrent] = useState(0);
-  const [total, setTotal] = useState(0);
   const pageChange = (c) => {
     setCurrent(c);
     getData(c);
   };
-  const getData = (c) =>
-    GetarticleApi({ current: c })
+  const getData = (c) => {
+    GetexamApi({ current: c })
       .then((res) => {
         console.log(res);
         setdata(res.data.data);
         setTotal(res.data.total);
       })
       .catch((err) => {});
-
+  };
   useEffect(() => {
     getData(1);
   }, []);
+
   const handleclick = (e) => {
-    const e_id = e.article_id;
-    axios({
-      method: "get",
-      url: `https://9417-60-21-106-94.ap.ngrok.io/my/article/changearticle/${e_id}`,
-      data: {
-        article_id: e_id,
-      },
-      // headers: {
-      //   authorization: managertokenstr,
-      // },
-    })
+    GetquestionApi({ exam_id: e.exam_id })
       .then((res) => {
-        console.log(res.data.data);
-        navigate("/lesson1", { state: res.data.data });
+        // console.log(res.data.data);
+        navigate("/question", {
+          state: { data: res.data.data, exam_id: e.exam_id },
+        });
+        // navigate("/question", { state: { exam_id: e.exam_id } });
       })
       .catch((err) => {});
+    // const e_id = e.article_id;
+    // axios({
+    //   method: "get",
+    //   url: `https://9417-60-21-106-94.ap.ngrok.io/my/article/changearticle/${e_id}`,
+    //   data: {
+    //     article_id: e_id,
+    //   },
+    //   // headers: {
+    //   //   authorization: managertokenstr,
+    //   // },
+    // })
+    //   .then((res) => {
+    //     console.log(res.data.data);
+    //     navigate("/lesson1", { state: res.data.data });
+    //   })
+    //   .catch((err) => {});
   };
   return (
-    <div>
+    <div id={styles.page}>
+      <Trainingheader />
       <List
         itemLayout="horizontal"
         dataSource={data}
         renderItem={(item) => (
           <List.Item>
             <List.Item.Meta
-              avatar={<img src={item.article_pic} alt="" />}
+              // avatar={<img src={item.article_pic} alt="" />}
               title={
                 <Button
                   type="link"
@@ -61,15 +72,15 @@ export default function Videolesson() {
                     handleclick(item);
                   }}
                 >
-                  {item.title}
+                  {item.exam_name}
                 </Button>
               }
-              children={item.author}
-              description={item.introduce}
+              // children={item.author}
+              // description={item.introduce}
             />
             <div>
-              <Tag color="#55acee">{item.article_type}</Tag> <br />
-              <Tag color="#55acee">{item.article_type_classify}</Tag>
+              <Tag color="#55acee">{item.exam_type}</Tag> <br />
+              <Tag color="#55acee">{item.exam_type_classify}</Tag>
             </div>
 
             {/* <div>

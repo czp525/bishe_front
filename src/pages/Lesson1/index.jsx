@@ -47,7 +47,10 @@ export default function Lesson1() {
   let user = JSON.parse(userstr);
 
   const doreply = () => {
-    window.scrollTo(0, document.body.scrollHeight);
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
   };
   const [form] = Form.useForm();
   const replyto = (nickname) => {
@@ -55,7 +58,10 @@ export default function Lesson1() {
     form.setFieldsValue({ article_comment: `@${nickname}` });
     // setReply({ article_comment: `@${nickname}` });
     if (formlist) {
-      window.scrollTo(0, document.body.scrollHeight);
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
     }
   };
   // const removeItem = (index) => {

@@ -79,7 +79,7 @@ export default function Main() {
       <div className={styles.box} style={{ display: "flex" }}>
         <div className={styles.lesson}>
           <div>
-            <Button type="link" style={{ fontSize: "25px" }}>
+            <Button type="link" style={{ fontSize: "25px " }}>
               视频课程{" >"}
             </Button>
           </div>

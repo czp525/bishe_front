@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import Myheader from "../../components/Myheader";
+import { useLocation, useNavigate } from "react-router-dom";
+import Forumheader from "../../components/Forumheader";
 import styles from "./index.module.css";
 import { Pagination, List, Button } from "antd";
-import { GetforumApi } from "../../request/api";
-import { Form, Input, Divider } from "antd";
+import { GetforumApi, AddforumApi, GetforumlistApi } from "../../request/api";
+import { Form, Input, Divider, message } from "antd";
 
 const layout = {
   labelCol: {
@@ -29,11 +30,19 @@ export default function Forum() {
   const [data, setdata] = useState([]);
   const formlist = useRef();
   const [form] = Form.useForm();
-
+  const navigate = useNavigate();
+  const userstr = localStorage.getItem("userdata");
+  let user = JSON.parse(userstr);
+  const addforum = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  };
   const getData = (c) => {
     GetforumApi({ current: c })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setdata(res.data.data);
         setTotal(res.data.total);
       })
@@ -48,41 +57,38 @@ export default function Forum() {
   };
   const onFinish = (values) => {
     console.log(values);
-    // AddarticlecommentApi({
-    //   ...values,
-    //   article_id: state.article_id,
-    //   username: user.username,
-    // })
-    //   .then((res) => {
-    //     // console.log(res);
-    //     formlist.current.resetFields();
-    //     message.success("评论发布成功");
-    //     init();
-    //   })
-    //   .catch((err) => {});
+    AddforumApi({
+      forum_title: values.title,
+      forum_writer: user.nickname,
+      forum_body: values.forum,
+    })
+      .then((res) => {
+        message.success("发布成功");
+        form.resetFields();
+        getData(1);
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      })
+      .catch((err) => {});
   };
-
-  // const handleclick = (e) => {
-  //   const e_id = e.article_id;
-  //   axios({
-  //     method: "get",
-  //     url: `https://b94a-123-185-222-223.jp.ngrok.io/my/article/changearticle/${e_id}`,
-  //     data: {
-  //       article_id: e_id,
-  //     },
-  //     // headers: {
-  //     //   authorization: managertokenstr,
-  //     // },
-  //   })
-  //     .then((res) => {
-  //       console.log(res.data.data);
-  //       navigate("/lesson1", { state: res.data.data });
-  //     })
-  //     .catch((err) => {});
-  // };
+  const handleclick = (e) => {
+    const e_id = e.forum_id;
+    GetforumlistApi({ forum_id: e_id })
+      .then((res) => {
+        // console.log(res);
+        navigate("/post", { state: res.data.data });
+      })
+      .catch((err) => {});
+  };
   return (
     <div id={styles.page}>
-      <Myheader />
+      <Forumheader />
+      <Button type="primary" onClick={addforum} style={{ margin: "20px 0" }}>
+        发布新帖
+      </Button>
+      <Divider />
       <List
         itemLayout="horizontal"
         dataSource={data}
@@ -94,7 +100,7 @@ export default function Forum() {
                 <Button
                   type="link"
                   onClick={() => {
-                    // handleclick(item);
+                    handleclick(item);
                   }}
                 >
                   {item.forum_title}

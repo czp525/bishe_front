@@ -62,13 +62,16 @@ export default function Myheader() {
     navigate("/personal");
   }
   return (
-    <Header className={styles.header}>
-      <img
-        src="../icon.png"
-        alt=""
-        className={styles.icon}
-        onClick={refreshpage}
-      ></img>
+    <header className={styles.header}>
+      <div className={styles.iconbox}>
+        <img
+          src="../icon.png"
+          alt=""
+          className={styles.icon}
+          onClick={refreshpage}
+        ></img>
+      </div>
+
       <div className={styles["search-wrapper"]}>
         <Search
           placeholder="input search text"
@@ -100,6 +103,6 @@ export default function Myheader() {
           {/* <button>登录</button>|<button>注册</button> */}
         </div>
       )}
-    </Header>
+    </header>
   );
 }

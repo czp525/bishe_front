@@ -62,24 +62,58 @@ export const AddvideocommentApi = (params) =>
 //提交文章评论
 export const AddarticlecommentApi = (params) =>
   request.post("/my/article/addarticlecomment", params);
-  //获取视频评论
+//获取视频评论
 export const GetvideocommentApi = (params) =>
-  request.post("/my/video/getvideocomment",params);
+  request.post("/my/video/getvideocomment", params);
 
 //获取文章评论
 export const GetarticlecommentApi = (params) =>
   request.post("/my/article/getarticlecomment", params);
-  //保存视频进度
+//保存视频进度
 export const VideoprogressApi = (params) =>
   request.post("/my/video/duration", params);
-  //获取视频进度
+//获取视频进度
 export const GetvideodurationApi = (params) =>
   request.get("/my/video/updateduration", { params });
 //保存文章进度
-  export const ArticleprogressApi = (params) =>
-    request.post("/my/article/duration1", params);
-      //获取文章进度
+export const ArticleprogressApi = (params) =>
+  request.post("/my/article/duration1", params);
+//获取文章进度
 export const GetarticledurationApi = (params) =>
   request.get("/my/article/updateduration1", { params });
-  //获取帖子
-export const GetforumApi = (params) => request.get("/my/forum/getpage", {params});
+//获取全部帖子
+export const GetforumApi = (params) =>
+  request.get("/my/forum/getpage", { params });
+
+//发帖
+export const AddforumApi = (params) =>
+  request.post("/my/forum/addforum", params);
+//获取帖子详情
+export const GetforumlistApi = (params) =>
+  request.post("/my/forum/getforum", params);
+//获取帖子全部回复
+export const GetforumcommentApi = (params) =>
+  request.get("/my/forum/getpage1", { params });
+//提交评论
+export const AddforumcommentApi = (params) =>
+  request.post("/my/forum/addcomment", params);
+//获取全部题库·
+export const GetexamApi = (params) =>
+  request.get("/my/exam/getexam", { params });
+//获取题目
+export const GetquestionApi = (params) =>
+  request.post("/my/exam/question", params);
+//提交答案
+export const AddanswerApi = (params) =>
+  request.post("/my/exam/submitexam", params);
+
+//删除试题
+export const DeleteexamApi = (params) =>
+  request.post("/my/exam/deleteexam", params);
+
+//获取成绩
+export const GetgradeApi = (params) => request.post("/my/exam/garde", params);
+//获取答题详情
+export const GettestdetailApi = (params) =>
+  request.post("/my/exam/examresult", params);
+

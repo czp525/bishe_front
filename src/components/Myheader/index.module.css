@@ -13,7 +13,11 @@
 .icon {
   width: 120px;
   height: 80px;
-  margin: auto 20px;
+  margin:10px;
+}
+.iconbox{
+  height: 100%;
+  text-align: center;
 }
 .search-wrapper {
   display: flex;

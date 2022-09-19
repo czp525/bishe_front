@@ -16,9 +16,9 @@ export default function Mysider() {
   const handleClick = (e) => {
     navigate("/" + e.key);
   };
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
+  // const toggleCollapsed = () => {
+  //   setCollapsed(!collapsed);
+  // };
 
   return (
     <div
@@ -47,7 +47,7 @@ export default function Mysider() {
         // defaultOpenKeys={["sub1"]}
         mode="inline"
         theme="light"
-        inlineCollapsed={collapsed}
+        // inlineCollapsed={collapsed}
         // items={items}
 
         style={{
@@ -61,7 +61,7 @@ export default function Mysider() {
         }}
       >
         <Menu.Item
-          key="courses"
+          key="courses/videolesson"
           icon={
             <PieChartOutlined
               style={{

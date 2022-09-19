@@ -1,0 +1,22 @@
+.msearchbox{
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 2px;
+  margin-bottom: 20px;
+}
+.msearch{
+  width: 500px;
+  display: block;
+ margin: 20px auto;
+}
+.mcontent{
+  /* height: 100px; */
+    border-style: solid;
+  border-width: 2px;
+    border-radius: 25px;
+    padding: 20px;
+    /* background-color: #fff; */
+}
+.newarticlebutton{
+  margin: 5px;
+}

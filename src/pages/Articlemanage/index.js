@@ -37,7 +37,7 @@ export default function Articlemanage() {
     GetarticleApi({ current: c })
       // axios({
       //   method: "get",
-      //   url: "https://b94a-123-185-222-223.jp.ngrok.io/my/article/articles",
+      //   url: "https://9417-60-21-106-94.ap.ngrok.io/my/article/articles",
       //   params: { current: c },
       //   headers: {
       //     authorization: managertokenstr,
@@ -58,7 +58,7 @@ export default function Articlemanage() {
     if (window.confirm("确定要删除吗")) {
       axios({
         method: "get",
-        url: `https://b94a-123-185-222-223.jp.ngrok.io/my/article/deletearticle/${d_id}`,
+        url: `https://9417-60-21-106-94.ap.ngrok.io/my/article/deletearticle/${d_id}`,
         headers: {
           authorization: managertokenstr,
         },
@@ -77,7 +77,7 @@ export default function Articlemanage() {
     const e_id = e.article_id;
     axios({
       method: "get",
-      url: `https://b94a-123-185-222-223.jp.ngrok.io/my/article/changearticle/${e_id}`,
+      url: `https://9417-60-21-106-94.ap.ngrok.io/my/article/changearticle/${e_id}`,
       data: {
         article_id: e_id,
       },

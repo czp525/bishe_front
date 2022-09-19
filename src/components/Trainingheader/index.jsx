@@ -3,7 +3,7 @@ import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 
-export default function Lessonheader() {
+export default function Trainingheader() {
   const navigate = useNavigate();
   const tofirst = () => {
     navigate("/");
@@ -12,7 +12,10 @@ export default function Lessonheader() {
     navigate("/forum");
   };
   const totraining = () => {
-    navigate("/training");
+    navigate("/courses/videolesson");
+  };
+  const towrong = () => {
+    navigate("/errorsets");
   };
   return (
     <div className={styles.lessonheader}>
@@ -39,7 +42,14 @@ export default function Lessonheader() {
           onClick={totraining}
           style={{ fontSize: "20px", margin: "20px" }}
         >
-          训练营
+          课程
+        </Button>
+        <Button
+          type="link"
+          onClick={towrong}
+          style={{ fontSize: "20px", margin: "20px" }}
+        >
+          错题集
         </Button>
       </div>
     </div>

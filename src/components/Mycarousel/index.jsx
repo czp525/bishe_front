@@ -12,11 +12,12 @@ import { GetrandimgApi } from "../../request/api";
 
 export default function Mycarousel() {
   const [src, setSrc] = useState([]);
+  console.log(src);
   const init = () => {
     GetrandimgApi().then((res) => {
       // console.log(res);
       // console.log(res.data.data);
-      setSrc(res.data.data);
+      setSrc(res.data.data || []);
       // console.log(src);
     });
   };
@@ -25,7 +26,7 @@ export default function Mycarousel() {
   }, []);
   return (
     <div className={styles.carouselcontainer}>
-      {src.length > 0 && (
+      {src?.length > 0 && (
         <Carousel autoplay className={styles.carousel}>
           <div>
             <img

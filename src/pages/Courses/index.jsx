@@ -24,7 +24,7 @@ export default function Courses() {
     <div id={styles.page}>
       <Lessonheader></Lessonheader>
       <Tabs
-        defaultActiveKey="1"
+        defaultActiveKey="videolesson"
         // onChange={onChange}
         onTabClick={onTabClick}
         style={{ marginTop: "20px" }}

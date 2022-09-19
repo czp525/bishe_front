@@ -32,7 +32,8 @@ export default function Msider() {
   const location = useLocation();
   useEffect(() => {
     let path = location.pathname;
-    let key = path.split("/")[1];
+    let key = path.split("/")[2];
+    // console.log(key);
     setdefaultkey(key);
   }, []);
   const handleClick = (e) => {
@@ -48,8 +49,8 @@ export default function Msider() {
         }}
       >
         <Menu
-          // defaultSelectedKeys={["1"]}
-          // defaultOpenKeys={["sub1"]}
+          // defaultSelectedKeys={["articlemanage"]}
+          defaultOpenKeys={["sub1"]}
           selectedKeys={[defaultkey]}
           mode="inline"
           theme="lihgt"

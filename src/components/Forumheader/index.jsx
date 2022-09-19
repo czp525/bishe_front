@@ -3,13 +3,13 @@ import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 
-export default function Lessonheader() {
+export default function Forumheader() {
   const navigate = useNavigate();
   const tofirst = () => {
     navigate("/");
   };
   const toforum = () => {
-    navigate("/forum");
+    navigate("/courses/videolesson");
   };
   const totraining = () => {
     navigate("/training");
@@ -32,7 +32,7 @@ export default function Lessonheader() {
           onClick={toforum}
           style={{ fontSize: "20px", margin: "20px" }}
         >
-          论坛
+          课程
         </Button>
         <Button
           type="link"

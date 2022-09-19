@@ -124,14 +124,20 @@ export default function Lesson2() {
   let user = JSON.parse(userstr);
   // console.log(user);
   const doreply = () => {
-    window.scrollTo(0, document.body.scrollHeight);
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
   };
   const [form] = Form.useForm();
   const replyto = (nickname) => {
     form.resetFields();
     form.setFieldsValue({ video_comment: `@${nickname}` });
     if (formlist) {
-      window.scrollTo(0, document.body.scrollHeight);
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
     }
   };
   let actions = (index, nickname) => [
