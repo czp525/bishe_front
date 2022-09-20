@@ -99,8 +99,6 @@ export default function Question() {
             </div>
             <Form.Item
               name={item.question_id}
-              // label={`第${index + 1}题`}
-              // key={index}
               style={{ marginLeft: "150px" }}
               rules={[{ required: true, message: "请选择答案！" }]}
             >

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./index.module.css";
 // import { SearcharticleApi } from "../../request/api";
-import { GetexamApi, DeleteexamApi, TrainingserchApi } from "../../request/api";
+import { GetexamApi, DeleteexamApi, TrainingserchApi ,GetquestionApi} from "../../request/api";
 
 const { Column } = Table;
 export default function Articlemanage() {
@@ -49,25 +49,16 @@ export default function Articlemanage() {
         .catch((err) => {});
     }
   };
-  const editarticle = (e) => {
-    // console.log(e);
-    const e_id = e.article_id;
-    axios({
-      method: "get",
-      url: `http://10.2.13.132:8088/my/article/changearticle/${e_id}`,
-      data: {
-        article_id: e_id,
-      },
-      headers: {
-        authorization: managertokenstr,
-      },
-    })
-      .then((res) => {
-        // console.log(res);
-        navigate("/editarticle", { state: res.data.data });
-      })
-      .catch((err) => {});
-  };
+    const editexam = (e) => {
+      GetquestionApi({ exam_id: e.exam_id })
+        .then((res) => {
+          console.log(res);
+          navigate("/editexam", {
+            state: { data: res.data.data, exam_id: e.exam_id },
+          });
+        })
+        .catch((err) => {});
+    };
   useEffect(() => {
     if (!managertokenstr) {
       navigate("/managerlogin");
@@ -118,7 +109,7 @@ export default function Articlemanage() {
             render={(_, record) => (
               <Space size="middle">
                 <Button
-                  onClick={() => editarticle(record)}
+                  onClick={() => editexam(record)}
                   type="primary"
                   style={{ borderRadius: "10px" }}
                 >

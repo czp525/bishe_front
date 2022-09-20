@@ -28,11 +28,17 @@ export default function Videoprogress() {
     <div>
       <div className={styles.mcontent}>
         <Divider />
-        <Table dataSource={data} pagination={false} rowKey={"username"}>
+        <Table dataSource={data} pagination={false}>
           <Column title="用户名" dataIndex="username" key="username" />
           <Column title="题目" dataIndex="title" key="title" />
-          <Column title="当前进度" dataIndex="propercent" key="propercent" />
-          <Progress percent={50} status="active" />
+          <Column
+            title="当前进度"
+            dataIndex="propercent"
+            key="propercent"
+            render={(text, record, index) => (
+              <Progress percent={text.match(/\d+(?=%)/)[0]} status="active" />
+            )}
+          />
           <Column title="更新时间" dataIndex="date" key="date" />
         </Table>
         <Pagination

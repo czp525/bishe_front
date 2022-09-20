@@ -27,6 +27,7 @@ import Question from "../pages/Question/index";
 import Testdetails from "../pages/Testdetails/index";
 import Errorsets from "../pages/Errorsets/index";
 import Newexam from "../pages/Newexam/index";
+import Editexam from "../pages/Editexam/index";
 
 const BaseRouter = () => (
   <Router>
@@ -71,6 +72,7 @@ const BaseRouter = () => (
       <Route path="/testdetails" element={<Testdetails />}></Route>
       <Route path="/errorsets" element={<Errorsets />}></Route>
       <Route path="/newexam" element={<Newexam />}></Route>
+      <Route path="/editexam" element={<Editexam/>}></Route>
     </Routes>
   </Router>
 );

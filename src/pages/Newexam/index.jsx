@@ -1,30 +1,42 @@
 import React, { useState } from "react";
 
 import Mheader from "../../components/Mheader/index";
-import { Button, Form, Input, Select, Space, Radio } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  Select,
+  Space,
+  Radio,
+  message,
+  Divider,
+} from "antd";
+import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { NewexamApi } from "../../request/api";
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 20,
-  },
-};
+
+// const layout = {
+  // labelCol: {
+  //   span: 8,
+  // },
+  // wrapperCol: {
+  //   span: 20,
+  // },
+// };
 /* eslint-disable no-template-curly-in-string */
 
-const validateMessages = {
-  required: "${label} is required!",
-  types: {
-    email: "${label} is not a valid email!",
-    number: "${label} is not a valid number!",
-  },
-  number: {
-    range: "${label} must be between ${min} and ${max}",
-  },
-};
+// const validateMessages = {
+//   required: "${label} is required!",
+//   types: {
+//     email: "${label} is not a valid email!",
+//     number: "${label} is not a valid number!",
+//   },
+//   number: {
+//     range: "${label} must be between ${min} and ${max}",
+//   },
+// };
 
 const typeData = ["前端", "后端", "大数据", "计算机网络"];
 const classifyData = {
@@ -36,6 +48,7 @@ const classifyData = {
 const { Option } = Select;
 
 export default function Newexam() {
+  const navigate =useNavigate();
   const [type, setType] = useState(classifyData[typeData[0]]);
   const [firsttype, setFirstType] = useState(typeData[0]);
   const [secondtype, setSecondType] = useState(classifyData[typeData[0]][0]);
@@ -49,34 +62,32 @@ export default function Newexam() {
   };
   const onFinish = (values) => {
     console.log(values);
-    // NewarticleApi({
-    //   title: values.title,
-    //   article_type: firsttype,
-    //   article_type_classify: secondtype,
-    //   author: values.author,
-    //   article_introduce: values.intro,
-    //   article_text: text,
-    //   article_html: html,
-    // })
-    //   .then((res) => {
-    //     message.success("创建课程成功！！");
-    //     setTimeout(() => {
-    //       navigate("/manage/articlemanage");
-    //     }, 1000);
-    //   })
-    //   .catch((err) => {});
+    NewexamApi({
+      values,
+      exam_type: firsttype,
+      exam_type_classify: secondtype,
+    })
+      .then((res) => {
+        console.log(res);
+        // message.success("创建课程成功！！");
+        // setTimeout(() => {
+        //   navigate("/manage/trainingmanage");
+        // }, 1000);
+      })
+      .catch((err) => {});
   };
 
   return (
     <div>
       <Mheader />
       <Form
-        {...layout}
+        // {...layout}
         name="nest-messages"
         onFinish={onFinish}
-        validateMessages={validateMessages}
+        // validateMessages={validateMessages}
         style={{
           marginTop: "20px",
+          marginLeft: "450px",
         }}
       >
         <Form.Item name="title" label="试题名">
@@ -109,87 +120,117 @@ export default function Newexam() {
           </Select>
         </Form.Item>
 
-        {/* aa */}
         <Form.List name="exam">
           {(fields, { add, remove }) => (
             <>
               {fields.map(({ key, name, ...restField }) => (
-                <Space
-                  key={key}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                    marginBottom: 8,
-                    // justifyContent: "space-between",
-                  }}
-                  align="baseline"
-                >
+                <div key={key}>
+                  <Divider/>
+                  <Space
+                    style={{
+                      marginBottom: 8,
+                    }}
+                    align="baseline"
+                  >
+                    <Form.Item
+                      {...restField}
+                      name={[name, "question"]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "请输入题目",
+                        },
+                      ]}
+                      label="题目"
+                    >
+                      <Input.TextArea
+                        placeholder="请输入题目"
+                        style={{ width: "750px" }}
+                      />
+                    </Form.Item>
+
+                    <MinusCircleOutlined onClick={() => remove(name)} />
+                  </Space>
                   <Form.Item
                     {...restField}
-                    name={[name, "question"]}
-                    // rules={[
-                    //   {
-                    //     required: true,
-                    //     message: "请输入题目",
-                    //   },
-                    // ]}
-                    label="题目"
+                    name={[name, "answer"]}
+                    style={{}}
+                    {...restField}
+                    rules={[
+                      {
+                        required: true,
+                        message: "请给出正确答案",
+                      },
+                    ]}
                   >
-                    <Input.TextArea
-                      placeholder="请输入题目"
-                      style={{ width: "750px" }}
-                    />
                     <Radio.Group>
                       <Radio value="A">
-                        <Form.Item name="A">
+                        <Form.Item
+                          {...restField}
+                          name={[name, "A"]}
+                          style={{}}
+                          {...restField}
+                          rules={[
+                            {
+                              required: true,
+                              message: "请给出正确答案",
+                            },
+                          ]}
+                        >
                           <Input />
                         </Form.Item>
                       </Radio>
                       <Radio value="B">
-                        <Form.Item name="B">
+                        <Form.Item
+                          {...restField}
+                          name={[name, "B"]}
+                          style={{}}
+                          {...restField}
+                          rules={[
+                            {
+                              required: true,
+                              message: "请给出正确答案",
+                            },
+                          ]}
+                        >
                           <Input />
                         </Form.Item>
                       </Radio>
                       <Radio value="C">
-                        <Form.Item name="C">
+                        <Form.Item
+                          {...restField}
+                          name={[name, "C"]}
+                          style={{}}
+                          {...restField}
+                          rules={[
+                            {
+                              required: true,
+                              message: "请给出正确答案",
+                            },
+                          ]}
+                        >
                           <Input />
                         </Form.Item>
                       </Radio>
                       <Radio value="D">
-                        <Form.Item name="D">
+                        <Form.Item
+                          {...restField}
+                          name={[name, "D"]}
+                          style={{}}
+                          {...restField}
+                          rules={[
+                            {
+                              required: true,
+                              message: "请给出正确答案",
+                            },
+                          ]}
+                        >
                           <Input />
                         </Form.Item>
                       </Radio>
                     </Radio.Group>
                   </Form.Item>
-
-                  <MinusCircleOutlined onClick={() => remove(name)} />
-                  {/* <Form.Item name="A" style={{ width: "300px" }}>
-                    <Radio.Group>
-                      <Radio value="A">
-                        <Form.Item name="A">
-                          <Input />
-                        </Form.Item>
-                      </Radio>
-                      <Radio value="B">
-                        <Form.Item name="B">
-                          <Input />
-                        </Form.Item>
-                      </Radio>
-                      <Radio value="C">
-                        <Form.Item name="C">
-                          <Input />
-                        </Form.Item>
-                      </Radio>
-                      <Radio value="D">
-                        <Form.Item name="D">
-                          <Input />
-                        </Form.Item>
-                      </Radio>
-                    </Radio.Group>
-                  </Form.Item> */}
-                </Space>
+                </div>
               ))}
               <Form.Item>
                 <Button
@@ -197,6 +238,7 @@ export default function Newexam() {
                   onClick={() => add()}
                   block
                   icon={<PlusOutlined />}
+                  style={{ width: "750px" }}
                 >
                   添加试题
                 </Button>
@@ -205,7 +247,7 @@ export default function Newexam() {
           )}
         </Form.List>
 
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+        <Form.Item>
           <Button type="primary" htmlType="submit">
             提交创建
           </Button>

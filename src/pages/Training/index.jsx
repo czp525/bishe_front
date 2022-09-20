@@ -38,22 +38,6 @@ export default function Training() {
         // navigate("/question", { state: { exam_id: e.exam_id } });
       })
       .catch((err) => {});
-    // const e_id = e.article_id;
-    // axios({
-    //   method: "get",
-    //   url: `http://10.2.13.132:8088/my/article/changearticle/${e_id}`,
-    //   data: {
-    //     article_id: e_id,
-    //   },
-    //   // headers: {
-    //   //   authorization: managertokenstr,
-    //   // },
-    // })
-    //   .then((res) => {
-    //     console.log(res.data.data);
-    //     navigate("/lesson1", { state: res.data.data });
-    //   })
-    //   .catch((err) => {});
   };
   return (
     <div id={styles.page}>

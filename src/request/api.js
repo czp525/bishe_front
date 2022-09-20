@@ -121,5 +121,8 @@ export const GettestdetailApi = (params) =>
   //错题集
     export const GeterrorsetApi = (params) =>
       request.post("/my/exam/errexam", params);
+      //新建试题
+          export const NewexamApi = (params) =>
+            request.post("/my/exam/addquestion", params);
 
 
