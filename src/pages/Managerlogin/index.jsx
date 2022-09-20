@@ -17,7 +17,7 @@ export default function Managerlogin() {
           }, 1000);
         }
         if (res.data.status === 1) {
-          alert("密码错误，请重试");
+          alert("密码错误,请重试");
         }
       })
       .catch(function (err) {});

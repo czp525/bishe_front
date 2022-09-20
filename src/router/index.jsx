@@ -26,7 +26,7 @@ import Post from "../pages/Post/index";
 import Question from "../pages/Question/index";
 import Testdetails from "../pages/Testdetails/index";
 import Errorsets from "../pages/Errorsets/index";
-// import Forgetpassword from "../pages/Forgetpassword/Forgetpassword";
+import Newexam from "../pages/Newexam/index";
 
 const BaseRouter = () => (
   <Router>
@@ -70,6 +70,7 @@ const BaseRouter = () => (
       <Route path="/question" element={<Question />}></Route>
       <Route path="/testdetails" element={<Testdetails />}></Route>
       <Route path="/errorsets" element={<Errorsets />}></Route>
+      <Route path="/newexam" element={<Newexam />}></Route>
     </Routes>
   </Router>
 );

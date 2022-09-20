@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://9417-60-21-106-94.ap.ngrok.io", // 通过使用配置的proxy来解决跨域
+  baseURL: "http://10.2.13.132:8088", // 通过使用配置的proxy来解决跨域np
   timeout: 5000,
 });
 

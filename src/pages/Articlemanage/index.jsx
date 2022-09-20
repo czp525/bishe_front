@@ -3,76 +3,68 @@ import { Input, Button, Divider, Space, Table, Pagination } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./index.module.css";
-import { SearchvideoApi } from "../../request/api";
-import { GetvideoApi } from "../../request/api";
+import { SearcharticleApi } from "../../request/api";
+import { GetarticleApi } from "../../request/api";
+
+// const managerstr = localStorage.getItem("managerdata");
 // const manager = JSON.parse(managerstr);
 // const managertokenstr = localStorage.getItem("managertoken");
 // console.log(manager);
 // console.log(managertokenstr);
 
 const { Column } = Table;
-
 export default function Articlemanage() {
+  //列表数组
   const [data, setdata] = useState([]);
   const navigate = useNavigate();
   const { Search } = Input;
   const onSearch = (value) => {
-    SearchvideoApi({ value: value })
-      // axios({
-      //   method: "post",
-      //   url: "http://10.2.13.116:8088/my/search1",
-      //   headers: {
-      //     authorization: managertokenstr,
-      //   },
-      //   data: {
-      //     value: value,
-      //   },
-      // })
+    SearcharticleApi({ value: value })
       .then((res) => {
         setTotal(res.data.total);
         setdata(res.data.data);
       })
       .catch((err) => {});
-  }; //搜索框内容
-  const newVideo = () => {
-    navigate("/newvideo");
+  }; //搜索
+  const newarticle = () => {
+    navigate("/newarticle");
   };
   const managertokenstr = localStorage.getItem("managertoken");
   const [current, setCurrent] = useState(0);
   const [total, setTotal] = useState(0);
   const getData = (c) => {
     // console.log(c);
-    GetvideoApi({ current: c })
+    GetarticleApi({ current: c })
       // axios({
       //   method: "get",
-      //   url: "http://10.2.13.116:8088/my/getpage1",
+      //   url: "http://10.2.13.132:8088/my/article/articles",
       //   params: { current: c },
       //   headers: {
       //     authorization: managertokenstr,
       //   },
       // })
       .then((res) => {
+        console.log(res);
         setdata(res.data.data);
         setTotal(res.data.total);
-        // console.log(total);
-      });
-    // .catch((err) => {});
+      })
+      .catch((err) => {});
   };
   useEffect(() => {
     getData(1);
   }, []);
-  const deletevideo = (d) => {
-    const d_id = d.video_id;
+  const deletearticle = (d) => {
+    const d_id = d.article_id;
     if (window.confirm("确定要删除吗")) {
       axios({
         method: "get",
-        url: `https://9417-60-21-106-94.ap.ngrok.io/my/video/delete/${d_id}`,
+        url: `http://10.2.13.132:8088/my/article/deletearticle/${d_id}`,
         headers: {
           authorization: managertokenstr,
         },
       })
         .then((res) => {
-          setdata(data.filter((item) => item.video_id !== d_id));
+          setdata(data.filter((item) => item.article_id !== d_id));
           console.log(data);
         })
         .catch((err) => {
@@ -80,29 +72,27 @@ export default function Articlemanage() {
         });
     }
   };
-  const editvideo = (e) => {
-    const e_id = e.video_id;
+  const editarticle = (e) => {
+    // console.log(e);
+    const e_id = e.article_id;
     axios({
       method: "get",
-      url: `https://9417-60-21-106-94.ap.ngrok.io/my/video/changevideo1/${e_id}`,
+      url: `http://10.2.13.132:8088/my/article/changearticle/${e_id}`,
       data: {
-        video_id: e_id,
+        article_id: e_id,
       },
       headers: {
         authorization: managertokenstr,
       },
     })
       .then((res) => {
-        console.log(res.data.data);
-        navigate("/editvideo", { state: res.data.data });
-        // localStorage.setItem("videodata", res.data.data);
-        // navigate("/editvideo");
+        // console.log(res);
+        navigate("/editarticle", { state: res.data.data });
       })
       .catch((err) => {});
   };
   useEffect(() => {
-    const token = localStorage.getItem("managertoken");
-    if (!token) {
+    if (!managertokenstr) {
       navigate("/managerlogin");
     }
   }, []);
@@ -111,8 +101,9 @@ export default function Articlemanage() {
     setCurrent(c);
     getData(c);
   };
+
   return (
-    <div>
+    <div className={styles.main}>
       <div className={styles.msearchbox}>
         <Search
           placeholder="input search text"
@@ -125,23 +116,23 @@ export default function Articlemanage() {
       </div>
       <div className={styles.mcontent}>
         <Button
-          onClick={newVideo}
+          onClick={newarticle}
           type="primary"
           style={{ borderRadius: "12px" }}
-          className={styles.newvideobutton}
+          className={styles.newarticlebutton}
         >
-          新建视频课程
+          新建文章课程
         </Button>
         <Divider />
-        <Table dataSource={data} pagination={false} rowKey={"video_id"}>
-          <Column title="ID" dataIndex="video_id" key="ID" />
+        <Table dataSource={data} pagination={false} rowKey={"article_id"}>
+          <Column title="ID" dataIndex="article_id" key="ID" />
           <Column title="标题" dataIndex="title" key="title" />
 
           <Column title="作者" dataIndex="author" key="author" />
-          <Column title="修改时间" dataIndex="video_date" key="time" />
+          <Column title="修改时间" dataIndex="article_date" key="time" />
           <Column
             title="简介"
-            dataIndex="video_introduce"
+            dataIndex="article_introduce"
             key="Introduction"
             ellipsis="true"
           />
@@ -152,14 +143,14 @@ export default function Articlemanage() {
             render={(_, record) => (
               <Space size="middle">
                 <Button
-                  onClick={() => editvideo(record)}
+                  onClick={() => editarticle(record)}
                   type="primary"
                   style={{ borderRadius: "10px" }}
                 >
                   编辑
                 </Button>
                 <Button
-                  onClick={() => deletevideo(record)}
+                  onClick={() => deletearticle(record)}
                   type="primary"
                   danger
                   style={{ borderRadius: "10px" }}

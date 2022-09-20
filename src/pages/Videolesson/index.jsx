@@ -31,7 +31,7 @@ export default function Videolesson() {
     const e_id = e.video_id;
     axios({
       method: "get",
-      url: `https://9417-60-21-106-94.ap.ngrok.io/my/video/changevideo1/${e_id}`,
+      url: `http://10.2.13.132:8088/my/video/changevideo1/${e_id}`,
       data: {
         video_id: e_id,
       },

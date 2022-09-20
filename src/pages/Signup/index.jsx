@@ -1,7 +1,8 @@
-import { Button, Form, Input, message, Select } from "antd";
+import { Button, Form, Input, message, Select, Upload } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RegisterApi } from "../../request/api";
+import { UploadOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -39,6 +40,8 @@ const tailFormItemLayout = {
 const Signup = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const [path, setPath] = useState();
+
   const onFinish = (values) => {
     RegisterApi({
       username: values.username,
@@ -75,6 +78,32 @@ const Signup = () => {
       </Select>
     </Form.Item>
   );
+
+  const props = {
+    name: "file",
+    action: "http://10.2.13.132:8088/uploadFile",
+    onChange(info) {
+      // console.log(info);
+      if (info.file.status !== "uploading") {
+        // console.log(info.file, info.fileList);
+      }
+
+      if (info.file.status === "done") {
+        // message.success(`${info.file.name} file uploaded successfully`);
+        // console.log(info.file.response);
+        setPath(info.file.response.filename);
+        // console.log(path);
+      } else if (info.file.status === "error") {
+        // message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    headers: {
+      authorization: "managertokenstr",
+    },
+    showUploadList: "false",
+    accept:
+      ".bmp,.jpg,.png,.tif,.gif,.pcx,.tga,.exif,.fpx,.svg,.psd,.cdr,.pcd,.dxf,.ufo,.eps,.ai,.raw,.WMF,.webp,.avif,.apng ",
+  };
 
   return (
     <div>
@@ -204,6 +233,11 @@ const Signup = () => {
             ]}
           >
             <Input addonBefore={prefixSelector} style={{ width: "750px" }} />
+          </Form.Item>
+          <Form.Item name={"video"} label="头像">
+            <Upload {...props}>
+              <Button icon={<UploadOutlined />}>点击上传头像</Button>
+            </Upload>
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./index.module.css";
 // import { SearcharticleApi } from "../../request/api";
-import { GetexamApi, DeleteexamApi } from "../../request/api";
+import { GetexamApi, DeleteexamApi, TrainingserchApi } from "../../request/api";
 
 const { Column } = Table;
 export default function Articlemanage() {
@@ -13,15 +13,15 @@ export default function Articlemanage() {
   const navigate = useNavigate();
   const { Search } = Input;
   const onSearch = (value) => {
-    // SearcharticleApi({ value: value })
-    // .then((res) => {
-    //   setTotal(res.data.total);
-    //   setdata(res.data.data);
-    // })
-    // .catch((err) => {});
+    TrainingserchApi({ value: value })
+      .then((res) => {
+        setTotal(res.data.total);
+        setdata(res.data.data);
+      })
+      .catch((err) => {});
   }; //搜索
   const newexam = () => {
-    // navigate("/newarticle");
+    navigate("/newexam");
   };
   const managertokenstr = localStorage.getItem("managertoken");
   const [current, setCurrent] = useState(0);
@@ -47,20 +47,6 @@ export default function Articlemanage() {
           setdata(data.filter((item) => item.exam_id !== d_id));
         })
         .catch((err) => {});
-      // axios({
-      //   method: "get",
-      //   url: `https://9417-60-21-106-94.ap.ngrok.io/my/article/deletearticle/${d_id}`,
-      //   headers: {
-      //     authorization: managertokenstr,
-      //   },
-      // })
-      //   .then((res) => {
-      //     setdata(data.filter((item) => item.article_id !== d_id));
-      //     console.log(data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err, 222222);
-      //   });
     }
   };
   const editarticle = (e) => {
@@ -68,7 +54,7 @@ export default function Articlemanage() {
     const e_id = e.article_id;
     axios({
       method: "get",
-      url: `https://9417-60-21-106-94.ap.ngrok.io/my/article/changearticle/${e_id}`,
+      url: `http://10.2.13.132:8088/my/article/changearticle/${e_id}`,
       data: {
         article_id: e_id,
       },

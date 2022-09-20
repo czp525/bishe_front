@@ -21,11 +21,12 @@ export default function Testdetails() {
   let user = JSON.parse(userstr);
   const [test, setTest] = useState([]);
   const [index, setIndex] = useState(0);
+  // const [color, setColor] = useState(green);
 
   useEffect(() => {
     GettestdetailApi({ exam_id: state.data.exam_id, username: user.username })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setTest(res.data.data);
         setIndex(1);
         console.log(test);
@@ -57,8 +58,29 @@ export default function Testdetails() {
                 <Radio value="D">{item.question_option_D}</Radio>
               </Radio.Group>
             </Form.Item>
-            <div style={{ marginBottom: "5px" }}>您的答案为：{item.answer}</div>
-            <div>正确答案为：{item.question_answer}</div>
+            <div style={{ marginBottom: "5px" }}>
+              您的答案为：
+              <div
+                style={{
+                  display: "inline-block",
+                  // color: { color },
+                }}
+              >
+                {item.answer}
+              </div>
+            </div>
+            <div>
+              正确答案为:
+              <div
+                style={{
+                  display: "inline-block",
+                  color: "green",
+                  marginLeft: "10px",
+                }}
+              >
+                {item.question_answer}
+              </div>
+            </div>
             <Divider />
           </div>
         ))}

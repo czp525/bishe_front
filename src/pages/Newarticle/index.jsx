@@ -125,6 +125,7 @@ export default function Test() {
             defaultValue={typeData[0]}
             style={{
               width: 200,
+              marginRight: "15px",
             }}
             onChange={handleTypeChange}
             autoFocus

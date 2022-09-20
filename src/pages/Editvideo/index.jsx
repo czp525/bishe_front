@@ -54,7 +54,7 @@ export default function Editvideo() {
   };
   const props = {
     name: "file",
-    action: "https://9417-60-21-106-94.ap.ngrok.io/uploadFile",
+    action: "http://10.2.13.132:8088/uploadFile",
     onChange(info) {
       if (info.file.status !== "uploading") {
       }
