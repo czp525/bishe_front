@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 // import "../assets/base.css";
 import styles from "./index.module.css";
 import { SearchApi } from "../../request/api";
+import { getImgurl } from "../../utils/requests";
 
 export default function Myheader() {
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ export default function Myheader() {
           <Avatar
             className={styles.avatar}
             size={60}
-            src={user.imgurl}
+            src={getImgurl(user.imgurl)}
             onClick={topersonal}
           />
           <Dropdown overlay={menu} className={styles.menu}>

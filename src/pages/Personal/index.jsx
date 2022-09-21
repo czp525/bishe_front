@@ -1,10 +1,10 @@
 import { Avatar } from "antd";
 import { Button, Form, Input, message, Select } from "antd";
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 import { PersonalApi } from "../../request/api";
+import { getImgurl } from "../../utils/requests";
 
 const tokenstr = localStorage.getItem("token");
 // console.log(tokenstr);
@@ -110,7 +110,7 @@ export default function Personal() {
     <div>
       <div className={styles.perava}>
         <Avatar
-          src={user.imgurl}
+          src={getImgurl(user.imgurl)}
           size={{
             xs: 24,
             sm: 32,

@@ -69,10 +69,10 @@ export default function Newexam() {
     })
       .then((res) => {
         console.log(res);
-        // message.success("创建课程成功！！");
-        // setTimeout(() => {
-        //   navigate("/manage/trainingmanage");
-        // }, 1000);
+        message.success("新建试题成功！！");
+        setTimeout(() => {
+          navigate("/manage/trainingmanage");
+        }, 1000);
       })
       .catch((err) => {});
   };

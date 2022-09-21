@@ -57,7 +57,7 @@ export default function Newvideo() {
 
       if (info.file.status === "done") {
         // message.success(`${info.file.name} file uploaded successfully`);
-        // console.log(info.file.response);
+        console.log(info.file.response);
         setPath(info.file.response.filename);
         // console.log(path);
       } else if (info.file.status === "error") {

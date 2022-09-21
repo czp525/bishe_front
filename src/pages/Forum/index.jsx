@@ -102,11 +102,16 @@ export default function Forum() {
                   onClick={() => {
                     handleclick(item);
                   }}
+                  style={{ fontSize: "16px" }}
                 >
                   {item.forum_title}
                 </Button>
               }
-              description={item.forum_body}
+              description={
+                <div style={{ fontSize: "14px", marginLeft: "12px" }}>
+                  {item.forum_body}
+                </div>
+              }
             />
             <div>{item.date}</div>
           </List.Item>

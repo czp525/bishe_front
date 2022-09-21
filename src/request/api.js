@@ -116,13 +116,16 @@ export const GetgradeApi = (params) => request.post("/my/exam/garde", params);
 //获取答题详情
 export const GettestdetailApi = (params) =>
   request.post("/my/exam/examresult", params);
-  //训练营管理搜索
-  export const TrainingserchApi = (params) => request.post("/my/exam/search", params);
-  //错题集
-    export const GeterrorsetApi = (params) =>
-      request.post("/my/exam/errexam", params);
-      //新建试题
-          export const NewexamApi = (params) =>
-            request.post("/my/exam/addquestion", params);
+//训练营管理搜索
+export const TrainingserchApi = (params) =>
+  request.post("/my/exam/search", params);
+//错题集
+export const GeterrorsetApi = (params) =>
+  request.post("/my/exam/errexam", params);
+//新建试题
+export const NewexamApi = (params) =>
+  request.post("/my/exam/addquestion", params);
 
-
+//提交试题编辑
+  export const EditexamApi = (params) =>
+    request.post("/my/exam/updateexam", params);

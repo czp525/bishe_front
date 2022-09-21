@@ -36,7 +36,11 @@ export default function Articleprogress() {
             dataIndex="propercent"
             key="propercent"
             render={(text, record, index) => (
-              <Progress percent={text.match(/\d+(?=%)/)[0]} status="active" />
+              <Progress
+                percent={text.match(/\d+(?=%)/)[0]}
+                status="active"
+                key={index}
+              />
             )}
           />
           <Column title="更新时间" dataIndex="date" key="date" />

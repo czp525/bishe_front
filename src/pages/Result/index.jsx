@@ -6,20 +6,6 @@ import { Pagination, List } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import { SearchApi } from "../../request/api";
 
-// const data = [
-//   {
-//     title: "Ant Design Title 1",
-//   },
-//   {
-//     title: "Ant Design Title 2",
-//   },
-//   {
-//     title: "Ant Design Title 3",
-//   },
-//   {
-//     title: "Ant Design Title 4",
-//   },
-// ];
 export default function Result() {
   const navigate = useNavigate();
   const location = useLocation();

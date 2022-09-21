@@ -53,23 +53,42 @@ export default function Videolesson() {
         renderItem={(item) => (
           <List.Item>
             <List.Item.Meta
-              avatar={<img src={item.article_pic} alt="" />}
+              avatar={
+                <img
+                  src={item.article_pic}
+                  alt=""
+                  style={{ width: "200px", height: "120px" }}
+                />
+              }
               title={
                 <Button
                   type="link"
                   onClick={() => {
                     handleclick(item);
                   }}
+                  style={{ fontSize: "20px", marginLeft: "100px" }}
                 >
                   {item.title}
                 </Button>
               }
-              children={item.author}
-              description={item.introduce}
+              description={
+                <div style={{ fontSize: "16px", marginLeft: "120px" }}>
+                  <br />
+                  {item.article_introduce}
+                </div>
+              }
             />
             <div>
-              <Tag color="#55acee">{item.article_type}</Tag> <br />
-              <Tag color="#55acee">{item.article_type_classify}</Tag>
+              <Tag color="#55acee" style={{ marginLeft: "120px" }}>
+                {item.article_type}
+              </Tag>
+              <br />
+              <Tag
+                color="#55acee"
+                style={{ marginLeft: "120px", marginTop: "5px" }}
+              >
+                {item.article_type_classify}
+              </Tag>
             </div>
 
             {/* <div>

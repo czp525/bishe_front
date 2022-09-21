@@ -55,16 +55,17 @@ export default function Training() {
                   onClick={() => {
                     handleclick(item);
                   }}
+                  style={{ fontSize: "16px" }}
                 >
                   {item.exam_name}
                 </Button>
               }
-              // children={item.author}
-              // description={item.introduce}
             />
             <div>
               <Tag color="#55acee">{item.exam_type}</Tag> <br />
-              <Tag color="#55acee">{item.exam_type_classify}</Tag>
+              <Tag color="#55acee" style={{ marginTop: "5px" }}>
+                {item.exam_type_classify}
+              </Tag>
             </div>
 
             {/* <div>

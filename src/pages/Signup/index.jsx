@@ -49,6 +49,7 @@ const Signup = () => {
       password: values.password,
       nickname: values.nickname,
       phone: values.phone,
+      imgurl: path,
     })
       .then(function (res) {
         if (res.data.status === 0) {
@@ -90,7 +91,7 @@ const Signup = () => {
 
       if (info.file.status === "done") {
         // message.success(`${info.file.name} file uploaded successfully`);
-        // console.log(info.file.response);
+        console.log(info.file.response);
         setPath(info.file.response.filename);
         // console.log(path);
       } else if (info.file.status === "error") {

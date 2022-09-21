@@ -13,7 +13,7 @@ import {
 } from "antd";
 import { useNavigate,useLocation } from "react-router-dom";
 import styles from "./index.module.css";
-import { NewexamApi } from "../../request/api";
+import { EditexamApi } from "../../request/api";
 
 // const typeData = ["前端", "后端", "大数据", "计算机网络"];
 // const classifyData = {
@@ -28,7 +28,7 @@ export default function Newexam() {
   const navigate = useNavigate();
   const location = useLocation();
   const {state}  = location;
-  console.log(state);
+  console.log(state.exam_id);
   // const [type, setType] = useState(classifyData[typeData[0]]);
   // const [firsttype, setFirstType] = useState(typeData[0]);
   // const [secondtype, setSecondType] = useState(classifyData[typeData[0]][0]);
@@ -42,19 +42,18 @@ export default function Newexam() {
   // };
   const onFinish = (values) => {
     console.log(values);
-    // NewexamApi({
-    //   values,
-    //   exam_type: firsttype,
-    //   exam_type_classify: secondtype,
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     message.success("创建课程成功！！");
-    //     setTimeout(() => {
-    //       navigate("/manage/trainingmanage");
-    //     }, 1000);
-    //   })
-    //   .catch((err) => {});
+    EditexamApi({
+      values,
+        exam_id:state.exam_id
+    })
+      .then((res) => {
+        console.log(res);
+        message.success("编辑试题成功！！");
+        setTimeout(() => {
+          navigate("/manage/trainingmanage");
+        }, 1000);
+      })
+      .catch((err) => {});
   };
 
   return (
@@ -69,7 +68,7 @@ export default function Newexam() {
         }}
       >
         <Form.Item
-          name="header-title"
+          name="title"
           label="试题名"
           initialValue={state.data[0].exam_name}
         >
@@ -89,6 +88,7 @@ export default function Newexam() {
                   },
                 ]}
                 label="题目"
+                initialValue={item.question_body}
               >
                 <Input.TextArea
                   placeholder="请输入题目"
@@ -103,25 +103,38 @@ export default function Newexam() {
                     message: "请给出正确答案",
                   },
                 ]}
+                initialValue={item.question_answer}
               >
                 <Radio.Group>
                   <Radio value="A">
-                    <Form.Item name={["exam", item.question_id, "A"]}>
+                    <Form.Item
+                      name={["exam", item.question_id, "A"]}
+                      initialValue={item.question_option_A}
+                    >
                       <Input />
                     </Form.Item>
                   </Radio>
                   <Radio value="B">
-                    <Form.Item name={["exam", item.question_id, "B"]}>
+                    <Form.Item
+                      name={["exam", item.question_id, "B"]}
+                      initialValue={item.question_option_B}
+                    >
                       <Input />
                     </Form.Item>
                   </Radio>
                   <Radio value="C">
-                    <Form.Item name={["exam", item.question_id, "C"]}>
+                    <Form.Item
+                      name={["exam", item.question_id, "C"]}
+                      initialValue={item.question_option_C}
+                    >
                       <Input />
                     </Form.Item>
                   </Radio>
                   <Radio value="D">
-                    <Form.Item name={["exam", item.question_id, "D"]}>
+                    <Form.Item
+                      name={["exam", item.question_id, "D"]}
+                      initialValue={item.question_option_D}
+                    >
                       <Input />
                     </Form.Item>
                   </Radio>

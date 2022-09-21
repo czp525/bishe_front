@@ -1,6 +1,7 @@
 
 .lesson {
   width: 49vw;
+  margin-right: 200px;
 }
 .charts {
   width: 21vw;
@@ -20,4 +21,7 @@ img{
   height: 48%;
   margin: 5px;
   border-radius: 10px;
+}
+.box{
+  margin-top: 50px;
 }

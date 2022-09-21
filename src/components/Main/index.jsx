@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, List } from "antd";
-
 import styles from "./index.module.css";
 import {
   GetrandarticleApi,
@@ -8,16 +7,14 @@ import {
   GetalApi,
   GetvlApi,
 } from "../../request/api";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-// const data = [
-//   "Racing car sprays burning fuel into crowd.",
-//   "Japanese princess to wed commoner.",
-//   "Australian walks 100km after outback crash.",
-//   "Man charged over missing wedding girl.",
-//   "Los Angeles battles huge wildfires.",
-// ];
+
+
 
 export default function Main() {
+  const navigate = useNavigate();
   const [articlesrc, setArticleSrc] = useState([]);
   const [videosrc, setVideoSrc] = useState([]);
   const [articledata, setArticledata] = useState([]);
@@ -25,6 +22,7 @@ export default function Main() {
 
   const articleinit = () => {
     GetrandarticleApi().then((res) => {
+        // console.log(res);
       setArticleSrc(res.data.data);
     });
   };
@@ -46,32 +44,112 @@ export default function Main() {
     videoinit();
     listinit();
   }, []);
+  const toVideolesson = () =>{
+    navigate("/courses/videolesson");
+  }
+    const toArticlelesson = () => {
+      navigate("/courses/articlelesson");
+    };
+
+      const articleclick = (e) => {
+        const e_id = e.article_id;
+        axios({
+          method: "get",
+          url: `http://10.2.13.132:8088/my/article/changearticle/${e_id}`,
+          data: {
+            article_id: e_id,
+          },
+          // headers: {
+          //   authorization: managertokenstr,
+          // },
+        })
+          .then((res) => {
+            console.log(res.data.data);
+            navigate("/lesson1", { state: res.data.data });
+          })
+          .catch((err) => {});
+      };
+        const videoclick = (e) => {
+          const e_id = e.video_id;
+          axios({
+            method: "get",
+            url: `http://10.2.13.132:8088/my/video/changevideo1/${e_id}`,
+            data: {
+              video_id: e_id,
+            },
+            // headers: {
+            //   authorization: managertokenstr,
+            // },
+          })
+            .then((res) => {
+              console.log(res.data.data);
+              navigate("/lesson2", { state: res.data.data });
+            })
+            .catch((err) => {});
+        };
   return (
     <div>
       <div className={styles.box} style={{ display: "flex" }}>
         <div className={styles.lesson}>
           <div>
-            <Button type="link" style={{ fontSize: "25px" }}>
+            <Button
+              type="link"
+              style={{ fontSize: "25px", marginBottom: "30px" }}
+              onClick={toArticlelesson}
+            >
               文章课程{" >"}
             </Button>
           </div>
-          {articlesrc.length > 0 && (
+          {/* {articlesrc.length > 0 && (
             <div className={styles.classimg}>
               <img src={articlesrc[0].article_pic} alt="" />
               <img src={articlesrc[1].article_pic} alt="" />
               <img src={articlesrc[2].article_pic} alt="" />
               <img src={articlesrc[3].article_pic} alt="" />
             </div>
-          )}
+          )} */}
+          <div className={styles.classimg}>
+            {articlesrc.map((item, index) => {
+              // console.log(item);
+              return (
+                <img
+                  src={item.article_pic}
+                  alt=""
+                  key={index}
+                  onClick={() => {
+                    articleclick(item);
+                  }}
+                />
+              );
+            })}
+          </div>
         </div>
         <div className="charts">
-          <p style={{ fontSize: "20px", color: "coral", marginLeft: "15px" }}>
+          <p
+            style={{
+              fontSize: "20px",
+              color: "coral",
+              marginLeft: "15px",
+              marginBottom: "20px",
+            }}
+          >
             文章课程排行榜
           </p>
           <List
             bordered
             dataSource={articledata}
-            renderItem={(item) => <List.Item>{item.title}</List.Item>}
+            renderItem={(item) => (
+              <List.Item>
+                <Button
+                  type="link"
+                  onClick={() => {
+                    articleclick(item);
+                  }}
+                >
+                  {item.title}
+                </Button>
+              </List.Item>
+            )}
             style={{ marginLeft: "15px" }}
           />
         </div>
@@ -79,27 +157,56 @@ export default function Main() {
       <div className={styles.box} style={{ display: "flex" }}>
         <div className={styles.lesson}>
           <div>
-            <Button type="link" style={{ fontSize: "25px " }}>
+            <Button
+              type="link"
+              style={{ fontSize: "25px ", marginBottom: "30px" }}
+              onClick={toVideolesson}
+            >
               视频课程{" >"}
             </Button>
           </div>
-          {videosrc.length > 0 && (
-            <div className={styles.classimg}>
-              <img src={videosrc[0].video_pic} alt="" />
-              <img src={videosrc[1].video_pic} alt="" />
-              <img src={videosrc[2].video_pic} alt="" />
-              <img src={videosrc[3].video_pic} alt="" />
-            </div>
-          )}
+          <div className={styles.classimg}>
+            {videosrc.map((item, index) => {
+              // console.log(item);
+              return (
+                <img
+                  src={item.video_pic}
+                  alt=""
+                  key={index}
+                  onClick={() => {
+                    videoclick(item);
+                  }}
+                />
+              );
+            })}
+          </div>
         </div>
         <div className="charts">
-          <p style={{ fontSize: "20px", color: "coral", marginLeft: "15px" }}>
+          <p
+            style={{
+              fontSize: "20px",
+              color: "coral",
+              marginLeft: "15px",
+              marginBottom: "20px",
+            }}
+          >
             视频课程排行榜
           </p>
           <List
             bordered
             dataSource={videodata}
-            renderItem={(item) => <List.Item>{item.title}</List.Item>}
+            renderItem={(item) => (
+              <List.Item>
+                <Button
+                  type="link"
+                  onClick={() => {
+                    videoclick(item);
+                  }}
+                >
+                  {item.title}
+                </Button>
+              </List.Item>
+            )}
             style={{ marginLeft: "15px" }}
           />
         </div>
