@@ -55,7 +55,7 @@ export default function Main() {
         const e_id = e.article_id;
         axios({
           method: "get",
-          url: `http://10.2.13.132:8088/my/article/changearticle/${e_id}`,
+          url: `http://10.2.13.136:8088/my/article/changearticle/${e_id}`,
           data: {
             article_id: e_id,
           },
@@ -69,26 +69,26 @@ export default function Main() {
           })
           .catch((err) => {});
       };
-        const videoclick = (e) => {
-          const e_id = e.video_id;
-          axios({
-            method: "get",
-            url: `http://10.2.13.132:8088/my/video/changevideo1/${e_id}`,
-            data: {
-              video_id: e_id,
-            },
-            // headers: {
-            //   authorization: managertokenstr,
-            // },
+      const videoclick = (e) => {
+        const e_id = e.video_id;
+        axios({
+          method: "get",
+          url: `http://10.2.13.136:8088/my/video/changevideo1/${e_id}`,
+          data: {
+            video_id: e_id,
+          },
+          // headers: {
+          //   authorization: managertokenstr,
+          // },
+        })
+          .then((res) => {
+            console.log(res.data.data);
+            navigate("/lesson2", { state: res.data.data });
           })
-            .then((res) => {
-              console.log(res.data.data);
-              navigate("/lesson2", { state: res.data.data });
-            })
-            .catch((err) => {});
-        };
+          .catch((err) => {});
+      };
   return (
-    <div>
+    <div id={styles.page}>
       <div className={styles.box} style={{ display: "flex" }}>
         <div className={styles.lesson}>
           <div>

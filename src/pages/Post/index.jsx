@@ -19,6 +19,7 @@ import {
 } from "@ant-design/icons";
 import { GetforumcommentApi, AddforumcommentApi } from "../../request/api";
 import dayjs from "dayjs";
+import { getImgurl } from "../../utils/requests";
 
 const layout = {
   labelCol: {
@@ -137,72 +138,74 @@ export default function Post() {
   return (
     <div id={styles.page}>
       <Forumheader />
-      <h2 className={styles.title}>{state.forum_title}</h2>
-      <Divider />
-      <Comment
-        // actions={actions(index, item.forum_writer)}
-        author={state.nickname}
-        avatar={state.imgurl}
-        content={state.forum_body}
-        datetime={dayjs(state.date).format("YYYY-MM-DD HH:mm:ss")}
-        className={styles.comment}
-      />
+      <div id={styles.page1}>
+        <h2 className={styles.title}>{state.forum_title}</h2>
+        <Divider />
+        <Comment
+          // actions={actions(index, item.forum_writer)}
+          author={state.nickname}
+          avatar={getImgurl(state.imgurl)}
+          content={state.forum_body}
+          datetime={dayjs(state.date).format("YYYY-MM-DD HH:mm:ss")}
+          className={styles.comment}
+        />
 
-      <Button type="primary" onClick={doreply}>
-        <HighlightOutlined />
-        点击评论
-      </Button>
-      <List
-        className="comment-list"
-        header={`共${total} 条回复`}
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item, index) => (
-          <li>
-            <Comment
-              actions={actions(index, item.nickname)}
-              author={item.nickname}
-              avatar={item.imgurl}
-              content={item.forum_comment}
-              datetime={dayjs(item.date).format("YYYY-MM-DD HH:mm:ss")}
-            />
-            <Divider />
-          </li>
-        )}
-      />
-      <Divider />
-      <Pagination
-        current={current}
-        style={{ marginTop: "20px" }}
-        defaultCurrent={1}
-        // pageSize={state.pageSize}
-        defaultPageSize={10}
-        pageSizeOptions={[5, 10, 15]}
-        total={total}
-        // showSizeChanger
-        showQuickJumper
-        onChange={pageChange}
-        showTotal={(total) => `共 ${total} 条回复`}
-        className={styles.pagination}
-      />
-      <Form
-        {...layout}
-        name="nest-messages"
-        ref={formlist}
-        onFinish={onFinish}
-        validateMessages={validateMessages}
-        initialValues={reply}
-        form={form}
-      >
-        <Form.Item name={["forum_comment"]} label="评论">
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
-          <Button type="primary" htmlType="submit">
-            发布
-          </Button>
-        </Form.Item>
-      </Form>
+        <Button type="primary" onClick={doreply}>
+          <HighlightOutlined />
+          点击评论
+        </Button>
+        <List
+          className="comment-list"
+          header={`共${total} 条回复`}
+          itemLayout="horizontal"
+          dataSource={data}
+          renderItem={(item, index) => (
+            <li>
+              <Comment
+                actions={actions(index, item.nickname)}
+                author={item.nickname}
+                avatar={getImgurl(item.imgurl)}
+                content={item.forum_comment}
+                datetime={dayjs(item.date).format("YYYY-MM-DD HH:mm:ss")}
+              />
+              <Divider />
+            </li>
+          )}
+        />
+        <Divider />
+        <Pagination
+          current={current}
+          style={{ marginTop: "20px" }}
+          defaultCurrent={1}
+          // pageSize={state.pageSize}
+          defaultPageSize={10}
+          pageSizeOptions={[5, 10, 15]}
+          total={total}
+          // showSizeChanger
+          showQuickJumper
+          onChange={pageChange}
+          showTotal={(total) => `共 ${total} 条回复`}
+          className={styles.pagination}
+        />
+        <Form
+          {...layout}
+          name="nest-messages"
+          ref={formlist}
+          onFinish={onFinish}
+          validateMessages={validateMessages}
+          initialValues={reply}
+          form={form}
+        >
+          <Form.Item name={["forum_comment"]} label="评论">
+            <Input.TextArea />
+          </Form.Item>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
+            <Button type="primary" htmlType="submit">
+              发布
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 }

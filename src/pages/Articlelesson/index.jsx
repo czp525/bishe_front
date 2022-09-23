@@ -31,7 +31,7 @@ export default function Videolesson() {
     const e_id = e.article_id;
     axios({
       method: "get",
-      url: `http://10.2.13.132:8088/my/article/changearticle/${e_id}`,
+      url: `http://10.2.13.136:8088/my/article/changearticle/${e_id}`,
       data: {
         article_id: e_id,
       },
@@ -46,7 +46,7 @@ export default function Videolesson() {
       .catch((err) => {});
   };
   return (
-    <div>
+    <div id={styles.page}>
       <List
         itemLayout="horizontal"
         dataSource={data}

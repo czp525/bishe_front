@@ -42,52 +42,54 @@ export default function Training() {
   return (
     <div id={styles.page}>
       <Trainingheader />
-      <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item>
-            <List.Item.Meta
-              // avatar={<img src={item.article_pic} alt="" />}
-              title={
-                <Button
-                  type="link"
-                  onClick={() => {
-                    handleclick(item);
-                  }}
-                  style={{ fontSize: "16px" }}
-                >
-                  {item.exam_name}
-                </Button>
-              }
-            />
-            <div>
-              <Tag color="#55acee">{item.exam_type}</Tag> <br />
-              <Tag color="#55acee" style={{ marginTop: "5px" }}>
-                {item.exam_type_classify}
-              </Tag>
-            </div>
+      <div id={styles.page1}>
+        <List
+          itemLayout="horizontal"
+          dataSource={data}
+          renderItem={(item) => (
+            <List.Item>
+              <List.Item.Meta
+                // avatar={<img src={item.article_pic} alt="" />}
+                title={
+                  <Button
+                    type="link"
+                    onClick={() => {
+                      handleclick(item);
+                    }}
+                    style={{ fontSize: "16px" }}
+                  >
+                    {item.exam_name}
+                  </Button>
+                }
+              />
+              <div>
+                <Tag color="#55acee">{item.exam_type}</Tag> <br />
+                <Tag color="#55acee" style={{ marginTop: "5px" }}>
+                  {item.exam_type_classify}
+                </Tag>
+              </div>
 
-            {/* <div>
+              {/* <div>
               {item.video_type} <br />
               {item.video_type_classify}
             </div> */}
-          </List.Item>
-        )}
-      />
-      <Pagination
-        current={current}
-        style={{ marginTop: "20px" }}
-        defaultCurrent={1}
-        // pageSize={state.pageSize}
-        defaultPageSize={10}
-        pageSizeOptions={[5, 10, 15]}
-        total={total}
-        // showSizeChanger
-        showQuickJumper
-        onChange={pageChange}
-        showTotal={(total) => `共 ${total} 条数据`}
-      />
+            </List.Item>
+          )}
+        />
+        <Pagination
+          current={current}
+          style={{ marginTop: "20px" }}
+          defaultCurrent={1}
+          // pageSize={state.pageSize}
+          defaultPageSize={10}
+          pageSizeOptions={[5, 10, 15]}
+          total={total}
+          // showSizeChanger
+          showQuickJumper
+          onChange={pageChange}
+          showTotal={(total) => `共 ${total} 条数据`}
+        />
+      </div>
     </div>
   );
 }

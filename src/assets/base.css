@@ -1,7 +1,7 @@
 @import "~antd/dist/antd.css";
 
 #app {
-  width: 75vw;
+  /* width: 75vw; */
   height: 100vh;
   margin: auto;
   background-color: #fff;
@@ -16,6 +16,7 @@
 /* sider content容器样式 */
 .container {
   display: flex;
+  /* width: 75vw; */
 }
 
 .lessonheader {

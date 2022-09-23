@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import "../../assets/base.css";
 import Myheader from "../../components/Myheader/index";
-import { Pagination, List } from "antd";
+import { Pagination, List ,Button} from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import { SearchApi } from "../../request/api";
+import axios from "axios";
+
 
 export default function Result() {
   const navigate = useNavigate();
@@ -32,6 +34,45 @@ export default function Result() {
   useEffect(() => {
     getData(1);
   }, []);
+
+    const handleclick = (e) => {
+      const e_id = e.article_id;
+      const d_id = e.video_id;
+      if (e_id) {
+        axios({
+          method: "get",
+          url: `http://10.2.13.136:8088/my/article/changearticle/${e_id}`,
+          data: {
+            article_id: e_id,
+          },
+          // headers: {
+          //   authorization: managertokenstr,
+          // },
+        })
+          .then((res) => {
+            console.log(res.data.data);
+            navigate("/lesson1", { state: res.data.data });
+          })
+          .catch((err) => {});
+      }
+      if (d_id) {
+                    axios({
+                      method: "get",
+                      url: `http://10.2.13.136:8088/my/video/changevideo1/${d_id}`,
+                      data: {
+                        video_id: e_id,
+                      },
+                      // headers: {
+                      //   authorization: managertokenstr,
+                      // },
+                    })
+                      .then((res) => {
+                        console.log(res.data.data);
+                        navigate("/lesson2", { state: res.data.data });
+                      })
+                      .catch((err) => {});
+      }
+    };
   return (
     <div id="page">
       <Myheader></Myheader>
@@ -41,9 +82,29 @@ export default function Result() {
         renderItem={(item) => (
           <List.Item>
             <List.Item.Meta
-              avatar={<img src={item.video_pic} alt="" />}
-              title={<a href=" ">{item.title}</a>}
-              description={item.author}
+              avatar={
+                <img
+                  src={item.video_pic || item.article_pic}
+                  alt=""
+                  style={{ width: "200px", height: "120px" }}
+                />
+              }
+              title={
+                <Button
+                  type="link"
+                  onClick={() => {
+                    handleclick(item);
+                  }}
+                  style={{ fontSize: "20px", marginLeft: "100px" }}
+                >
+                  {item.title}
+                </Button>
+              }
+              description={
+                <div style={{ fontSize: "16px", marginLeft: "120px" }}>
+                  {item.author}
+                </div>
+              }
             />
           </List.Item>
         )}

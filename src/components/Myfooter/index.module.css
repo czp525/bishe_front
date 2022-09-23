@@ -3,7 +3,7 @@
   height: 200px;
   margin-top: 100px;
   display: flex;
-   box-shadow: grey 2px 2px 2px 2px ;
+   box-shadow: grey 2px 2px 5px 2px ;
 }
 .footericon {
   width: 160px !important;

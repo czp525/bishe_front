@@ -15,6 +15,7 @@ import {
   HighlightOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
+import { getImgurl } from "../../utils/requests";
 
 const layout = {
   labelCol: {
@@ -47,10 +48,10 @@ export default function Lesson1() {
   let user = JSON.parse(userstr);
 
   const doreply = () => {
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: "smooth",
-        });
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
   };
   const [form] = Form.useForm();
   const replyto = (nickname) => {
@@ -58,10 +59,10 @@ export default function Lesson1() {
     form.setFieldsValue({ article_comment: `@${nickname}` });
     // setReply({ article_comment: `@${nickname}` });
     if (formlist) {
-          window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: "smooth",
-          });
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
     }
   };
   // const removeItem = (index) => {
@@ -91,6 +92,7 @@ export default function Lesson1() {
       .then((res) => {
         console.log(res);
         setData(res.data.data);
+        // console.log(data);
         form.resetFields();
         setReply();
       })
@@ -147,56 +149,58 @@ export default function Lesson1() {
   return (
     <div id={styles.page}>
       <Lessonheader></Lessonheader>
-      <h2>{state.title}</h2>
-      <h4 style={{ color: "grey" }}>{state.author}</h4>
-      <Divider />
-      <div
-        dangerouslySetInnerHTML={{ __html: state.article_html }}
-        // onScroll={logscroll}
-      ></div>
+      <div id={styles.page1}>
+        <h2>{state.title}</h2>
+        <h4 style={{ color: "grey" }}>{state.author}</h4>
+        <Divider />
+        <div
+          dangerouslySetInnerHTML={{ __html: state.article_html }}
+          // onScroll={logscroll}
+        ></div>
 
-      <Divider />
-      <Button type="primary" onClick={doreply}>
-        <HighlightOutlined />
-        点击评论
-      </Button>
-      <List
-        className="comment-list"
-        header={`共${data.length} 条评论`}
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item, index) => (
-          <li>
-            <Comment
-              actions={actions(index, item.nickname)}
-              author={item.nickname}
-              avatar={item.imgurl}
-              content={item.article_comment}
-              datetime={dayjs(item.date).format("YYYY-MM-DD HH:mm:ss")}
-            />
-            <Divider />
-          </li>
-        )}
-      />
-      <Divider />
-      <Form
-        {...layout}
-        name="nest-messages"
-        ref={formlist}
-        onFinish={onFinish}
-        validateMessages={validateMessages}
-        initialValues={reply}
-        form={form}
-      >
-        <Form.Item name={["article_comment"]} label="评论">
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
-          <Button type="primary" htmlType="submit">
-            发布
-          </Button>
-        </Form.Item>
-      </Form>
+        <Divider />
+        <Button type="primary" onClick={doreply}>
+          <HighlightOutlined />
+          点击评论
+        </Button>
+        <List
+          className="comment-list"
+          header={`共${data.length} 条评论`}
+          itemLayout="horizontal"
+          dataSource={data}
+          renderItem={(item, index) => (
+            <li>
+              <Comment
+                actions={actions(index, item.nickname)}
+                author={item.nickname}
+                avatar={getImgurl(item.imgurl)}
+                content={item.article_comment}
+                datetime={dayjs(item.date).format("YYYY-MM-DD HH:mm:ss")}
+              />
+              <Divider />
+            </li>
+          )}
+        />
+        <Divider />
+        <Form
+          {...layout}
+          name="nest-messages"
+          ref={formlist}
+          onFinish={onFinish}
+          validateMessages={validateMessages}
+          initialValues={reply}
+          form={form}
+        >
+          <Form.Item name={["article_comment"]} label="评论">
+            <Input.TextArea />
+          </Form.Item>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
+            <Button type="primary" htmlType="submit">
+              发布
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 }

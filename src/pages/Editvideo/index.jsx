@@ -54,7 +54,7 @@ export default function Editvideo() {
   };
   const props = {
     name: "file",
-    action: "http://10.2.13.132:8088/uploadFile",
+    action: "http://10.2.13.136:8088/uploadFile",
     onChange(info) {
       if (info.file.status !== "uploading") {
       }
@@ -94,7 +94,11 @@ export default function Editvideo() {
         </Form.Item>
 
         <Form.Item name={"videopre"} label="视频预览">
-          <video src={getVideoPath(state.video_url)} controls></video>
+          <video
+            src={getVideoPath(state.video_url)}
+            controls
+            style={{ width: "750px", height: "500px" }}
+          ></video>
         </Form.Item>
         <Form.Item name={"video"} label="视频">
           <Upload {...props}>

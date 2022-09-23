@@ -82,7 +82,7 @@ const Signup = () => {
 
   const props = {
     name: "file",
-    action: "http://10.2.13.132:8088/uploadFile",
+    action: "http://10.2.13.136:8088/uploadFile",
     onChange(info) {
       // console.log(info);
       if (info.file.status !== "uploading") {

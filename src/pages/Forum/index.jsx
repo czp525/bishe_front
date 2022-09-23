@@ -85,73 +85,75 @@ export default function Forum() {
   return (
     <div id={styles.page}>
       <Forumheader />
-      <Button type="primary" onClick={addforum} style={{ margin: "20px 0" }}>
-        发布新帖
-      </Button>
-      <Divider />
-      <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item>
-            <List.Item.Meta
-              // avatar={}
-              title={
-                <Button
-                  type="link"
-                  onClick={() => {
-                    handleclick(item);
-                  }}
-                  style={{ fontSize: "16px" }}
-                >
-                  {item.forum_title}
-                </Button>
-              }
-              description={
-                <div style={{ fontSize: "14px", marginLeft: "12px" }}>
-                  {item.forum_body}
-                </div>
-              }
-            />
-            <div>{item.date}</div>
-          </List.Item>
-        )}
-      />
-
-      <Pagination
-        current={current}
-        style={{ marginTop: "20px" }}
-        defaultCurrent={1}
-        // pageSize={state.pageSize}
-        defaultPageSize={10}
-        pageSizeOptions={[5, 10, 15]}
-        total={total}
-        // showSizeChanger
-        showQuickJumper
-        onChange={pageChange}
-        showTotal={(total) => `共 ${total} 条数据`}
-      />
-      <Divider />
-      <Form
-        {...layout}
-        name="nest-messages"
-        ref={formlist}
-        onFinish={onFinish}
-        validateMessages={validateMessages}
-        form={form}
-      >
-        <Form.Item name={["title"]} label="标题">
-          <Input />
-        </Form.Item>
-        <Form.Item name={["forum"]} label="内容">
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
-          <Button type="primary" htmlType="submit">
-            发布
-          </Button>
-        </Form.Item>
-      </Form>
+      <div id={styles.page1}>
+        {" "}
+        <Button type="primary" onClick={addforum} style={{ margin: "20px 0" }}>
+          发布新帖
+        </Button>
+        <Divider />
+        <List
+          itemLayout="horizontal"
+          dataSource={data}
+          renderItem={(item) => (
+            <List.Item>
+              <List.Item.Meta
+                // avatar={}
+                title={
+                  <Button
+                    type="link"
+                    onClick={() => {
+                      handleclick(item);
+                    }}
+                    style={{ fontSize: "16px" }}
+                  >
+                    {item.forum_title}
+                  </Button>
+                }
+                description={
+                  <div style={{ fontSize: "14px", marginLeft: "12px" }}>
+                    {item.forum_body}
+                  </div>
+                }
+              />
+              <div>{item.date}</div>
+            </List.Item>
+          )}
+        />
+        <Pagination
+          current={current}
+          style={{ marginTop: "20px" }}
+          defaultCurrent={1}
+          // pageSize={state.pageSize}
+          defaultPageSize={10}
+          pageSizeOptions={[5, 10, 15]}
+          total={total}
+          // showSizeChanger
+          showQuickJumper
+          onChange={pageChange}
+          showTotal={(total) => `共 ${total} 条数据`}
+        />
+        <Divider />
+        <Form
+          {...layout}
+          name="nest-messages"
+          ref={formlist}
+          onFinish={onFinish}
+          validateMessages={validateMessages}
+          form={form}
+        >
+          <Form.Item name={["title"]} label="标题">
+            <Input />
+          </Form.Item>
+          <Form.Item name={["forum"]} label="内容">
+            <Input.TextArea />
+          </Form.Item>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
+            <Button type="primary" htmlType="submit">
+              发布
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 }

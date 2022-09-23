@@ -18,6 +18,7 @@ import {
   HighlightOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
+import { getImgurl } from "../../utils/requests";
 
 const layout = {
   labelCol: {
@@ -124,20 +125,20 @@ export default function Lesson2() {
   let user = JSON.parse(userstr);
   // console.log(user);
   const doreply = () => {
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: "smooth",
-        });
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
   };
   const [form] = Form.useForm();
   const replyto = (nickname) => {
     form.resetFields();
     form.setFieldsValue({ video_comment: `@${nickname}` });
     if (formlist) {
-          window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: "smooth",
-          });
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
     }
   };
   let actions = (index, nickname) => [
@@ -277,69 +278,72 @@ export default function Lesson2() {
   return (
     <div id={styles.page}>
       <Lessonheader></Lessonheader>
-      <h2>{state.title}</h2>
-      <h4 style={{ color: "grey" }}>{state.author}</h4>
-      <Divider />
-      <div className={styles.video}>
-        <video
-          src={getVideoPath(state.video_url)}
-          controls
-          className={styles.controls}
-          ref={video}
-          // onCanPlay={canpaly}
-          // id="x"
-        ></video>
-      </div>
-      <Divider />
-      <div>
-        简介：
-        <br />
-        {state.video_introduce}
-      </div>
+      <div id={styles.page1}>
+        <h2>{state.title}</h2>
+        <h4 style={{ color: "grey" }}>{state.author}</h4>
+        <Divider />
+        <div className={styles.video}>
+          <video
+            src={getVideoPath(state.video_url)}
+            controls
+            className={styles.controls}
+            ref={video}
+            style={{ width: "750px", height: "500px" }}
+            // onCanPlay={canpaly}
+            // id="x"
+          ></video>
+        </div>
+        <Divider />
+        <div>
+          简介：
+          <br />
+          {state.video_introduce}
+        </div>
 
-      <Divider />
-      <Button type="primary" onClick={doreply}>
-        <HighlightOutlined />
-        点击评论
-      </Button>
-      <List
-        className="comment-list"
-        header={`共${data.length} 条评论`}
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item, index) => (
-          <li>
-            <Comment
-              actions={actions(index, item.nickname)}
-              author={item.nickname}
-              avatar={item.imgurl}
-              content={item.video_comment}
-              // datetime={item.date}
-              datetime={dayjs(item.date).format("YYYY-MM-DD HH:mm:ss")}
-            />
-            <Divider />
-          </li>
-        )}
-      />
+        <Divider />
+        <Button type="primary" onClick={doreply}>
+          <HighlightOutlined />
+          点击评论
+        </Button>
+        <List
+          className="comment-list"
+          header={`共${data.length} 条评论`}
+          itemLayout="horizontal"
+          dataSource={data}
+          renderItem={(item, index) => (
+            <li>
+              <Comment
+                actions={actions(index, item.nickname)}
+                author={item.nickname}
+                avatar={getImgurl(item.imgurl)}
+                content={item.video_comment}
+                // datetime={item.date}
+                datetime={dayjs(item.date).format("YYYY-MM-DD HH:mm:ss")}
+              />
+              <Divider />
+            </li>
+          )}
+        />
 
-      <Form
-        {...layout}
-        name="nest-messages"
-        ref={formlist}
-        onFinish={onFinish}
-        validateMessages={validateMessages}
-        initialValues={reply}
-        form={form}
-      >
-        <Form.Item name={["video_comment"]} label="评论">
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
-          <Button type="primary" htmlType="submit">
-            发布
-          </Button>
-        </Form.Item>
-      </Form>
+        <Form
+          {...layout}
+          name="nest-messages"
+          ref={formlist}
+          onFinish={onFinish}
+          validateMessages={validateMessages}
+          initialValues={reply}
+          form={form}
+        >
+          <Form.Item name={["video_comment"]} label="评论">
+            <Input.TextArea />
+          </Form.Item>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
+            <Button type="primary" htmlType="submit">
+              发布
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 }
