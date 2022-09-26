@@ -1,20 +1,38 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Menu, Space, Layout, Input, Avatar } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 // import "../assets/base.css";
 import styles from "./index.module.css";
-import { SearchApi } from "../../request/api";
 import { getImgurl } from "../../utils/requests";
+import { SearchApi } from "../../request/api";
+
 
 export default function Myheader() {
   const navigate = useNavigate();
   const location = useLocation();
   const { Search } = Input;
   const { Header } = Layout;
+    const [data, setdata] = useState([]);
+    const [current, setCurrent] = useState(0);
+    const [total, setTotal] = useState(0);
   const onSearch = (value) => {
+        const getData = (c) => {
+          SearchApi({ value: value, current: c })
+            .then((res) => {
+              console.log(res);
+              let a = [...res.data.data, ...res.data.data1];
+              console.log(a);
+              setdata(a);
+              console.log(data);
+              setTotal(res.data.total);
+            })
+            .catch((err) => {});
+        };
     if (location.pathname !== "/result") {
       navigate("/result", { state: value });
+    }else{
+      getData(1);
     }
   }; //搜索框内容
 

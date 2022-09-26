@@ -1,7 +1,8 @@
 .manage {
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   /* background-color: #daf0fa; */
+  /* background-color: #fbfcfd; */
 }
 .mcontainer{
   display: flex;
@@ -12,4 +13,9 @@
   flex: 1;
   box-sizing: border-box;
   padding: 20px;
+  background-color: #fbfcfd;
+
+}
+body{
+  background-color: #fbfcfd;
 }

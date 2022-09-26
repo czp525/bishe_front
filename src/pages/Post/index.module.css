@@ -1,14 +1,14 @@
 #page{
     /* width: 75vw; */
-  height: 100vh;
+  /* height: auto; */
   margin: auto;
-  background-color: #fff;
+  background-color: #fbfcfd;
 }
 #page1{
     width: 75vw;
   /* height: 100vh; */
   margin: auto;
-  background-color: #fff;
+  /* background-color: #fbfcfd; */
 }
 .pagination{
   margin: 20px 0;
@@ -20,4 +20,7 @@
 }
 .comment{
   margin-bottom: 20px;
+}
+body{
+  background-color: #fbfcfd;
 }

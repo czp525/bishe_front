@@ -1,14 +1,14 @@
 #page {
   /* width: 75vw; */
-  height: 100vh;
-  margin: auto;
-  background-color: #fff;
+  /* height: 100vh; */
+  /* margin: auto; */
+  background-color: #fbfcfd;
 }
 #page1 {
   width: 75vw;
   /* height: 100vh; */
   margin: auto;
-  background-color: #fff;
+  background-color: #fbfcfd;
 }
 .video {
 text-align: center;

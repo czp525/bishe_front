@@ -29,7 +29,7 @@ export default function Mycarousel() {
     if (e.article_id) {
       axios({
         method: "get",
-        url: `http://10.2.13.136:8088/my/article/changearticle/${e.article_id}`,
+        url: `http://10.2.13.142:8088/my/article/changearticle/${e.article_id}`,
         data: {
           article_id: e.article_id,
         },
@@ -45,7 +45,7 @@ export default function Mycarousel() {
     } else {
       axios({
         method: "get",
-        url: `http://10.2.13.136:8088/my/video/changevideo1/${e.video_id}`,
+        url: `http://10.2.13.142:8088/my/video/changevideo1/${e.video_id}`,
         data: {
           video_id: e.video_id,
         },
@@ -69,7 +69,7 @@ export default function Mycarousel() {
               <img
                 src={item.article_pic}
                 alt=""
-                style={{ height: "500px", width: "800px" }}
+                style={{ height: "600px", width: "900px" }}
                 onClick={() => {
                   handleclick(item);
                 }}
@@ -83,7 +83,7 @@ export default function Mycarousel() {
               <img
                 src={item.video_pic}
                 alt=""
-                style={{ height: "500px", width: "800px" }}
+                style={{ height: "600px", width: "900px" }}
                 onClick={() => {
                   handleclick(item);
                 }}

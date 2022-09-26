@@ -25,6 +25,10 @@ export default function Mysider() {
       style={{
         width: 200,
         boxShadow: "2px 2px 5px grey",
+        // marginLeft:"100px",
+        marginTop:'40px',
+        marginBottom:"10px",
+        backgroundColor:'#fff'
       }}
     >
       {/* <Button

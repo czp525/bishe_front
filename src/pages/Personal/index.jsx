@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 import { PersonalApi } from "../../request/api";
 import { getImgurl } from "../../utils/requests";
+import Mheader from "../../components/Mheader/index";
+
 
 const tokenstr = localStorage.getItem("token");
 // console.log(tokenstr);
@@ -74,40 +76,10 @@ export default function Personal() {
         }
       })
       .catch(function (err) {});
-
-    // axios({
-    //   method: "post",
-    //   url: "http://10.2.13.116:8088/my/userinfo",
-    //   headers: {
-    //     authorization: tokenstr,
-    //   },
-    //   data: {
-    //     email: values.email,
-    //     nickname: values.nickname,
-    //     phonenumber: values.phonenumber,
-    //     username: user.username,
-    //     // imgurl: user.imgurl,
-    //   },
-    // })
-    //   .then(function (res) {
-    //     // console.log(res);
-    //     if (res.data.status === 0) {
-    //       message.success("修改成功");
-    //       console.log(res.data.message);
-    //       localStorage.setItem("userdata", res.data.message);
-    //       // localStorage.setItem("token", res.data.token);
-    //       setTimeout(navigate("/"), 1500);
-    //     }
-    //     if (res.data.status === 1) {
-    //       alert(res.data.message);
-    //     }
-    //   })
-    //   .catch(function (err) {
-    //     // console.log(err);
-    //   });
   };
   return (
     <div>
+      <Mheader ></Mheader>
       <div className={styles.perava}>
         <Avatar
           src={getImgurl(user.imgurl)}
@@ -130,7 +102,7 @@ export default function Personal() {
           onFinish={onFinish}
           scrollToFirstError
         >
-          <h2 style={{ textAlign: "center" }}>用户名：{user.username}</h2>
+          {/* <div style={{ textAlign: "center" }}>用户名：{user.username}</div> */}
 
           <Form.Item
             name="email"
@@ -145,6 +117,7 @@ export default function Personal() {
                 message: "请输入邮箱!",
               },
             ]}
+            style = {{marginTop:'20px'}}
           >
             <Input style={{ width: "750px" }} />
           </Form.Item>

@@ -23,6 +23,7 @@ export default function Result() {
   const getData = (c) => {
     SearchApi({ value: state, current: c })
       .then((res) => {
+        console.log(res);
         let a = [...res.data.data, ...res.data.data1];
         console.log(a);
         setdata(a);
@@ -41,7 +42,7 @@ export default function Result() {
       if (e_id) {
         axios({
           method: "get",
-          url: `http://10.2.13.136:8088/my/article/changearticle/${e_id}`,
+          url: `http://10.2.13.142:8088/my/article/changearticle/${e_id}`,
           data: {
             article_id: e_id,
           },
@@ -58,7 +59,7 @@ export default function Result() {
       if (d_id) {
                     axios({
                       method: "get",
-                      url: `http://10.2.13.136:8088/my/video/changevideo1/${d_id}`,
+                      url: `http://10.2.13.142:8088/my/video/changevideo1/${d_id}`,
                       data: {
                         video_id: e_id,
                       },
@@ -74,54 +75,56 @@ export default function Result() {
       }
     };
   return (
-    <div id="page">
+    <div id={styles.page}>
       <Myheader></Myheader>
-      <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={
-                <img
-                  src={item.video_pic || item.article_pic}
-                  alt=""
-                  style={{ width: "200px", height: "120px" }}
-                />
-              }
-              title={
-                <Button
-                  type="link"
-                  onClick={() => {
-                    handleclick(item);
-                  }}
-                  style={{ fontSize: "20px", marginLeft: "100px" }}
-                >
-                  {item.title}
-                </Button>
-              }
-              description={
-                <div style={{ fontSize: "16px", marginLeft: "120px" }}>
-                  {item.author}
-                </div>
-              }
-            />
-          </List.Item>
-        )}
-      />
-      <Pagination
-        current={current}
-        style={{ marginTop: "20px" }}
-        defaultCurrent={1}
-        // pageSize={state.pageSize}
-        defaultPageSize={10}
-        pageSizeOptions={[5, 10, 15]}
-        total={total}
-        // showSizeChanger
-        showQuickJumper
-        onChange={pageChange}
-        showTotal={(total) => `共 ${total} 条数据`}
-      />
+      <div id={styles.page1}>
+        <List
+          itemLayout="horizontal"
+          dataSource={data}
+          renderItem={(item) => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={
+                  <img
+                    src={item.video_pic || item.article_pic}
+                    alt=""
+                    style={{ width: "200px", height: "120px" }}
+                  />
+                }
+                title={
+                  <Button
+                    type="link"
+                    onClick={() => {
+                      handleclick(item);
+                    }}
+                    style={{ fontSize: "20px", marginLeft: "100px" }}
+                  >
+                    {item.title}
+                  </Button>
+                }
+                description={
+                  <div style={{ fontSize: "16px", marginLeft: "120px" }}>
+                    {item.author}
+                  </div>
+                }
+              />
+            </List.Item>
+          )}
+        />
+        <Pagination
+          current={current}
+          style={{ marginTop: "20px" }}
+          defaultCurrent={1}
+          // pageSize={state.pageSize}
+          defaultPageSize={10}
+          pageSizeOptions={[5, 10, 15]}
+          total={total}
+          // showSizeChanger
+          showQuickJumper
+          onChange={pageChange}
+          showTotal={(total) => `共 ${total} 条数据`}
+        />
+      </div>
     </div>
   );
 }

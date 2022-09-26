@@ -23,7 +23,7 @@ export default function Courses() {
   return (
     <div id={styles.page}>
       <Lessonheader></Lessonheader>
-      <div style={{marginLeft:'250px',marginRight:"250px"}}>
+      <div style={{ marginLeft: "250px", marginRight: "250px" }}>
         <Tabs
           defaultActiveKey="videolesson"
           // onChange={onChange}
@@ -34,8 +34,7 @@ export default function Courses() {
           <TabPane tab="文章课程" key="articlelesson"></TabPane>
         </Tabs>
       </div>
-
-      <Outlet />
+        <Outlet />
     </div>
   );
 }

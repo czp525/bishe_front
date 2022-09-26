@@ -41,7 +41,7 @@ export default function Msider() {
     setdefaultkey(e.key);
   };
   return (
-    <Sider style={{ backgroundColor: "#fff" }}>
+    <Sider style={{ backgroundColor: "#fbfcfd" }}>
       <img src="../icon.png" className={styles.icon}></img>
       <div
         style={{

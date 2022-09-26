@@ -288,7 +288,7 @@ export default function Lesson2() {
             controls
             className={styles.controls}
             ref={video}
-            style={{ width: "750px", height: "500px" }}
+            style={{ width: "900px", height: "600px" ,backgroundColor:'black'}}
             // onCanPlay={canpaly}
             // id="x"
           ></video>

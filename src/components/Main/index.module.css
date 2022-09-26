@@ -1,10 +1,10 @@
 
 .lesson {
-  width: 49vw;
-  margin-right: 200px;
+  width: 80vw;
+  margin-right: 100px;
 }
 .charts {
-  width: 21vw;
+  width: 20vw;
 }
 .classimg {
   width: 100%;
@@ -16,7 +16,6 @@
 }
 img{
   flex: 1;
-  /* -webkit-flex: 1; */
   width: 48%;
   height: 48%;
   margin: 5px;
@@ -26,8 +25,8 @@ img{
   margin-top: 50px;
 }
 #page{
-  width: 75vw;
+  width: 95vw;
   /* height: 100vh; */
   margin: auto;
-  background-color: #fff;
+  background-color: #fbfcfd;
 }

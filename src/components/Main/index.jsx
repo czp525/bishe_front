@@ -14,6 +14,8 @@ import axios from "axios";
 
 
 export default function Main() {
+  // const [data, setdata] = useState([]);
+
   const navigate = useNavigate();
   const [articlesrc, setArticleSrc] = useState([]);
   const [videosrc, setVideoSrc] = useState([]);
@@ -55,7 +57,7 @@ export default function Main() {
         const e_id = e.article_id;
         axios({
           method: "get",
-          url: `http://10.2.13.136:8088/my/article/changearticle/${e_id}`,
+          url: `http://10.2.13.142:8088/my/article/changearticle/${e_id}`,
           data: {
             article_id: e_id,
           },
@@ -73,7 +75,7 @@ export default function Main() {
         const e_id = e.video_id;
         axios({
           method: "get",
-          url: `http://10.2.13.136:8088/my/video/changevideo1/${e_id}`,
+          url: `http://10.2.13.142:8088/my/video/changevideo1/${e_id}`,
           data: {
             video_id: e_id,
           },
@@ -88,127 +90,213 @@ export default function Main() {
           .catch((err) => {});
       };
   return (
-    <div id={styles.page}>
-      <div className={styles.box} style={{ display: "flex" }}>
-        <div className={styles.lesson}>
-          <div>
-            <Button
-              type="link"
-              style={{ fontSize: "25px", marginBottom: "30px" }}
-              onClick={toArticlelesson}
-            >
-              文章课程{" >"}
-            </Button>
-          </div>
-          {/* {articlesrc.length > 0 && (
-            <div className={styles.classimg}>
-              <img src={articlesrc[0].article_pic} alt="" />
-              <img src={articlesrc[1].article_pic} alt="" />
-              <img src={articlesrc[2].article_pic} alt="" />
-              <img src={articlesrc[3].article_pic} alt="" />
+    <div style={{ backgroundColor: "#fbfcfd" }}>
+      <div id={styles.page}>
+        <div className={styles.box} style={{ display: "flex" }}>
+          <div className={styles.lesson}>
+            <div>
+              <Button
+                type="link"
+                style={{ fontSize: "25px", marginBottom: "30px" }}
+                onClick={toArticlelesson}
+              >
+                文章课程{" >"}
+              </Button>
             </div>
-          )} */}
-          <div className={styles.classimg}>
-            {articlesrc.map((item, index) => {
-              // console.log(item);
-              return (
-                <img
-                  src={item.article_pic}
-                  alt=""
-                  key={index}
-                  onClick={() => {
-                    articleclick(item);
-                  }}
-                />
-              );
-            })}
-          </div>
-        </div>
-        <div className="charts">
-          <p
-            style={{
-              fontSize: "20px",
-              color: "coral",
-              marginLeft: "15px",
-              marginBottom: "20px",
-            }}
-          >
-            文章课程排行榜
-          </p>
-          <List
-            bordered
-            dataSource={articledata}
-            renderItem={(item) => (
-              <List.Item>
-                <Button
-                  type="link"
-                  onClick={() => {
-                    articleclick(item);
+
+            <List
+              grid={{
+                gutter: 16,
+                column: 2,
+              }}
+              dataSource={articlesrc}
+              renderItem={(item) => (
+                <List.Item
+                  style={{
+                    borderRadius: "10px",
+                    backgroundColor: "#fff",
+                    height: "250px",
                   }}
                 >
-                  {item.title}
-                </Button>
-              </List.Item>
-            )}
-            style={{ marginLeft: "15px" }}
-          />
-        </div>
-      </div>
-      <div className={styles.box} style={{ display: "flex" }}>
-        <div className={styles.lesson}>
-          <div>
-            <Button
-              type="link"
-              style={{ fontSize: "25px ", marginBottom: "30px" }}
-              onClick={toVideolesson}
+                  <List.Item.Meta
+                    avatar={
+                      <img
+                        src={item.article_pic}
+                        alt=""
+                        style={{ width: "200px", height: "120px" }}
+                      />
+                    }
+                    title={
+                      <Button
+                        type="link"
+                        onClick={() => {
+                          articleclick(item);
+                        }}
+                        style={{ fontSize: "20px" }}
+                      >
+                        {item.title}
+                      </Button>
+                    }
+                    description={
+                      <div style={{ fontSize: "16px", marginLeft: "20px" }}>
+                        {item.author}
+                        <br />
+                        {item.article_introduce}
+                      </div>
+                    }
+                  />
+                </List.Item>
+              )}
+            />
+
+            {/* <div className={styles.classimg}>
+              {articlesrc.map((item, index) => {
+                // console.log(item);
+                return (
+                  <img
+                    src={item.article_pic}
+                    alt=""
+                    key={index}
+                    onClick={() => {
+                      articleclick(item);
+                    }}
+                  />
+                );
+              })}
+            </div> */}
+          </div>
+          <div className="charts">
+            <p
+              style={{
+                fontSize: "20px",
+                color: "coral",
+                marginLeft: "15px",
+                marginBottom: "30px",
+              }}
             >
-              视频课程{" >"}
-            </Button>
-          </div>
-          <div className={styles.classimg}>
-            {videosrc.map((item, index) => {
-              // console.log(item);
-              return (
-                <img
-                  src={item.video_pic}
-                  alt=""
-                  key={index}
-                  onClick={() => {
-                    videoclick(item);
-                  }}
-                />
-              );
-            })}
+              文章课程排行榜
+            </p>
+
+            <List
+              bordered
+              dataSource={articledata}
+              renderItem={(item) => (
+                <List.Item style={{ backgroundColor: "#fff" }}>
+                  <Button
+                    type="link"
+                    onClick={() => {
+                      articleclick(item);
+                    }}
+                  >
+                    {item.title}
+                  </Button>
+                </List.Item>
+              )}
+              style={{ marginLeft: "15px" }}
+            />
           </div>
         </div>
-        <div className="charts">
-          <p
-            style={{
-              fontSize: "20px",
-              color: "coral",
-              marginLeft: "15px",
-              marginBottom: "20px",
-            }}
-          >
-            视频课程排行榜
-          </p>
-          <List
-            bordered
-            dataSource={videodata}
-            renderItem={(item) => (
-              <List.Item>
-                <Button
-                  type="link"
-                  onClick={() => {
-                    videoclick(item);
+        <div className={styles.box} style={{ display: "flex" }}>
+          <div className={styles.lesson}>
+            <div>
+              <Button
+                type="link"
+                style={{ fontSize: "25px ", marginBottom: "30px" }}
+                onClick={toVideolesson}
+              >
+                视频课程{" >"}
+              </Button>
+            </div>
+
+            <List
+              grid={{
+                gutter: 16,
+                column: 2,
+              }}
+              dataSource={videosrc}
+              renderItem={(item) => (
+                <List.Item
+                  style={{
+                    borderRadius: "10px",
+                    backgroundColor: "#fff",
+                    height: "250px",
                   }}
                 >
-                  {item.title}
-                </Button>
-              </List.Item>
-            )}
-            style={{ marginLeft: "15px" }}
-          />
+                  <List.Item.Meta
+                    avatar={
+                      <img
+                        src={item.video_pic}
+                        alt=""
+                        style={{ width: "200px", height: "120px" }}
+                      />
+                    }
+                    title={
+                      <Button
+                        type="link"
+                        onClick={() => {
+                          videoclick(item);
+                        }}
+                        style={{ fontSize: "20px" }}
+                      >
+                        {item.title}
+                      </Button>
+                    }
+                    description={
+                      <div style={{ fontSize: "16px", marginLeft: "20px" }}>
+                        {item.author}
+                        <br />
+                        {item.video_introduce}
+                      </div>
+                    }
+                  />
+                </List.Item>
+              )}
+            />
+            {/* <div className={styles.classimg}>
+              {videosrc.map((item, index) => {
+                // console.log(item);
+                return (
+                  <img
+                    src={item.video_pic}
+                    alt=""
+                    key={index}
+                    onClick={() => {
+                      videoclick(item);
+                    }}
+                  />
+                );
+              })}
+            </div> */}
+          </div>
+          <div className="charts">
+            <p
+              style={{
+                fontSize: "20px",
+                color: "coral",
+                marginLeft: "15px",
+                marginBottom: "30px",
+              }}
+            >
+              视频课程排行榜
+            </p>
+            <List
+              bordered
+              dataSource={videodata}
+              renderItem={(item) => (
+                <List.Item style={{ backgroundColor: "#fff" }}>
+                  <Button
+                    type="link"
+                    onClick={() => {
+                      videoclick(item);
+                    }}
+                  >
+                    {item.title}
+                  </Button>
+                </List.Item>
+              )}
+              style={{ marginLeft: "15px" }}
+            />
+          </div>
         </div>
       </div>
     </div>

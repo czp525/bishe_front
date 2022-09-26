@@ -80,8 +80,7 @@ export default function Question() {
   return (
     <div id={styles.page}>
       <Trainingheader />
-      <div id={styles.page}>
-        {" "}
+      <div id={styles.page1}>
         <Form
           name="validate_other"
           {...formItemLayout}

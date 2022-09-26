@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import Trainingheader from "../../components/Trainingheader";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
@@ -14,6 +14,7 @@ const formItemLayout = {
   },
 };
 export default function Testdetails() {
+  // const rgref = useRef({style:{color:"red"}})
   const location = useLocation();
   const { state } = location;
   // console.log(state);
@@ -21,7 +22,7 @@ export default function Testdetails() {
   let user = JSON.parse(userstr);
   const [test, setTest] = useState([]);
   const [index, setIndex] = useState(0);
-  // const [color, setColor] = useState(green);
+  // const [rg, setRg] = useState("green");
 
   useEffect(() => {
     GettestdetailApi({ exam_id: state.data.exam_id, username: user.username })
@@ -29,7 +30,10 @@ export default function Testdetails() {
         // console.log(res);
         setTest(res.data.data);
         setIndex(1);
-        console.log(test);
+        // console.log(test);
+
+        // console.log(rgref);
+        // rgref.current.style = {color:'green'}
       })
       .catch((err) => {});
   }, [index]);
@@ -63,7 +67,7 @@ export default function Testdetails() {
               <div
                 style={{
                   display: "inline-block",
-                  // color: { color },
+                  color: item.answer ===item.question_answer?"green":"red",             
                 }}
               >
                 {item.answer}
