@@ -115,7 +115,8 @@ export default function Main() {
                   style={{
                     borderRadius: "10px",
                     backgroundColor: "#fff",
-                    height: "250px",
+                    height: "200px",
+                    overflow: "hidden",
                   }}
                 >
                   <List.Item.Meta
@@ -138,10 +139,21 @@ export default function Main() {
                       </Button>
                     }
                     description={
-                      <div style={{ fontSize: "16px", marginLeft: "20px" }}>
+                      <div
+                        style={{
+                          fontSize: "16px",
+                          marginLeft: "20px",
+                          // height: "200px",
+                          // textOverflow: "ellipsis",
+                          // whiteSpace: "nowrap",
+                          // overflow: "hidden",
+                        }}
+                      >
                         {item.author}
                         <br />
-                        {item.article_introduce}
+                        {item.article_introduce.length > 75
+                          ? `${item.article_introduce.slice(0, 75)}...`
+                          : item.article_introduce}
                       </div>
                     }
                   />
@@ -219,7 +231,8 @@ export default function Main() {
                   style={{
                     borderRadius: "10px",
                     backgroundColor: "#fff",
-                    height: "250px",
+                    height: "200px",
+                    overflow: "hidden",
                   }}
                 >
                   <List.Item.Meta
@@ -245,7 +258,10 @@ export default function Main() {
                       <div style={{ fontSize: "16px", marginLeft: "20px" }}>
                         {item.author}
                         <br />
-                        {item.video_introduce}
+
+                        {item.video_introduce.length > 75
+                          ? `${item.video_introduce.slice(0, 75)}...`
+                          : item.video_introduce}
                       </div>
                     }
                   />

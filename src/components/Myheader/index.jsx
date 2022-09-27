@@ -8,30 +8,27 @@ import { getImgurl } from "../../utils/requests";
 import { SearchApi } from "../../request/api";
 
 
-export default function Myheader() {
+export default function Myheader(props) {
+  console.log(props);
   const navigate = useNavigate();
   const location = useLocation();
   const { Search } = Input;
-  const { Header } = Layout;
-    const [data, setdata] = useState([]);
-    const [current, setCurrent] = useState(0);
-    const [total, setTotal] = useState(0);
+  const { setdata } = props;
+  const [total, setTotal] = useState(0);
   const onSearch = (value) => {
-        const getData = (c) => {
-          SearchApi({ value: value, current: c })
-            .then((res) => {
-              console.log(res);
-              let a = [...res.data.data, ...res.data.data1];
-              console.log(a);
-              setdata(a);
-              console.log(data);
-              setTotal(res.data.total);
-            })
-            .catch((err) => {});
-        };
+    const getData = (c) => {
+      SearchApi({ value: value, current: c })
+        .then((res) => {
+          let a = [...res.data.data, ...res.data.data1];
+          console.log(a);
+          setdata(a);
+          setTotal(res.data.total);
+        })
+        .catch((err) => {});
+    };
     if (location.pathname !== "/result") {
       navigate("/result", { state: value });
-    }else{
+    } else {
       getData(1);
     }
   }; //搜索框内容

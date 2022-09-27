@@ -57,26 +57,26 @@ export default function Result() {
           .catch((err) => {});
       }
       if (d_id) {
-                    axios({
-                      method: "get",
-                      url: `http://10.2.13.142:8088/my/video/changevideo1/${d_id}`,
-                      data: {
-                        video_id: e_id,
-                      },
-                      // headers: {
-                      //   authorization: managertokenstr,
-                      // },
-                    })
-                      .then((res) => {
-                        console.log(res.data.data);
-                        navigate("/lesson2", { state: res.data.data });
-                      })
-                      .catch((err) => {});
+        axios({
+          method: "get",
+          url: `http://10.2.13.142:8088/my/video/changevideo1/${d_id}`,
+          data: {
+            video_id: e_id,
+          },
+          // headers: {
+          //   authorization: managertokenstr,
+          // },
+        })
+          .then((res) => {
+            console.log(res.data.data);
+            navigate("/lesson2", { state: res.data.data });
+          })
+          .catch((err) => {});
       }
     };
   return (
     <div id={styles.page}>
-      <Myheader></Myheader>
+      <Myheader setdata={setdata}></Myheader>
       <div id={styles.page1}>
         <List
           itemLayout="horizontal"
