@@ -49,19 +49,12 @@ export default function Question() {
         values: values,
       })
         .then((res) => {
-          GetgradeApi({ exam_id: state.exam_id, username: user.username })
+          console.log(res);
+       GetgradeApi({ exam_id: state.exam_id, username: user.username })
             .then((res) => {
               console.log(res);
               setGrade(res.data.garde);
               setIsModalOpen(true);
-              // Modal.confirm({
-              //   title: "阅卷完成",
-              //   icon: <ExclamationCircleOutlined />,
-              //   content: `你的成绩是 ${res.data.garde} 分`,
-              //   okText: "查看题目详情",
-              //   cancelText: "取消",
-              //   onOk: { getgrade },
-              // });
             })
             .catch((err) => {});
         })
@@ -69,14 +62,6 @@ export default function Question() {
     }
   };
 
-  // const confirm = () => {
-  //   Modal.confirm({
-  //     title: "Confirm",
-  //     content: "Bla bla ...",
-  //     okText: "确认",
-  //     cancelText: "取消",
-  //   });
-  // };
   return (
     <div id={styles.page}>
       <Trainingheader />
@@ -97,7 +82,7 @@ export default function Question() {
           // }}
         >
           {state.data.map((item, index) => (
-            <div key={index}>
+            <div key={index} style={{backgroundColor:'#fff'}}>
               <div>{`第${index + 1}题`}</div>
               <div style={{ marginLeft: "150px", marginBottom: "20px" }}>
                 {item.question_body}

@@ -36,50 +36,58 @@ export default function Errorsets() {
   return (
     <div id={styles.page}>
       <Trainingheader />
-
-      <Form
-        name="validate_other"
-        {...formItemLayout}
-        // onFinish={onFinish}
-        style={{ marginLeft: "150px", marginBottom: "20px", marginTop: "30px" }}
-      >
-        {test.map((item, index) => (
-          <div key={index}>
-            <div>{`第${index + 1}题`}</div>
-            <div style={{ marginLeft: "150px", marginBottom: "20px" }}>
-              {item.question_body}
-            </div>
-            <Form.Item name={item.question_id} style={{ marginLeft: "150px" }}>
-              <Radio.Group defaultValue={item.question_answer}>
-                <Radio value="A">{item.question_option_A}</Radio>
-                <Radio value="B">{item.question_option_B}</Radio>
-                <Radio value="C">{item.question_option_C}</Radio>
-                <Radio value="D">{item.question_option_D}</Radio>
-              </Radio.Group>
-            </Form.Item>
-            <div style={{ marginBottom: "5px" }}>
-              出自题库：{item.exam_name}
-              <Tag color="#55acee" style={{ marginLeft: "40px" }}>
-                {item.exam_type}
-              </Tag>
-              <Tag color="#55acee">{item.exam_type_classify}</Tag>
-            </div>
-            <div>
-              正确答案为：
-              <div
-                style={{
-                  display: "inline-block",
-                  color: "green",
-                  marginLeft: "10px",
-                }}
-              >
-                {item.question_answer}
+      <div id={styles.page1}>
+        <Form
+          name="validate_other"
+          {...formItemLayout}
+          // onFinish={onFinish}
+          style={{
+            // marginLeft: "150px",
+            marginBottom: "20px",
+            marginTop: "30px",
+          }}
+        >
+          {test.map((item, index) => (
+            <div key={index} style={{backgroundColor:'#fff'}}>
+              <div>{`第${index + 1}题`}</div>
+              <div style={{ marginLeft: "150px", marginBottom: "20px" }}>
+                {item.question_body}
               </div>
+              <Form.Item
+                name={item.question_id}
+                style={{ marginLeft: "150px" }}
+              >
+                <Radio.Group defaultValue={item.question_answer}>
+                  <Radio value="A">{item.question_option_A}</Radio>
+                  <Radio value="B">{item.question_option_B}</Radio>
+                  <Radio value="C">{item.question_option_C}</Radio>
+                  <Radio value="D">{item.question_option_D}</Radio>
+                </Radio.Group>
+              </Form.Item>
+              <div style={{ marginBottom: "5px" }}>
+                出自题库：{item.exam_name}
+                <Tag color="#55acee" style={{ marginLeft: "40px" }}>
+                  {item.exam_type}
+                </Tag>
+                <Tag color="#55acee">{item.exam_type_classify}</Tag>
+              </div>
+              <div>
+                正确答案为：
+                <div
+                  style={{
+                    display: "inline-block",
+                    color: "green",
+                    marginLeft: "10px",
+                  }}
+                >
+                  {item.question_answer}
+                </div>
+              </div>
+              <Divider />
             </div>
-            <Divider />
-          </div>
-        ))}
-      </Form>
+          ))}
+        </Form>
+      </div>
     </div>
   );
 }

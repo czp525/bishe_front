@@ -71,7 +71,7 @@ export default function Forum() {
         window.scrollTo({
           top: 0,
           behavior: "smooth",
-        });
+        }); 
       })
       .catch((err) => {});
   };
@@ -88,7 +88,6 @@ export default function Forum() {
     <div id={styles.page}>
       <Forumheader />
       <div id={styles.page1}>
-        {" "}
         <Button type="primary" onClick={addforum} style={{ margin: "20px 0" }}>
           发布新帖
         </Button>
