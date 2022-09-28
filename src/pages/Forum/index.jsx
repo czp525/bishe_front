@@ -33,6 +33,7 @@ export default function Forum() {
   const navigate = useNavigate();
   const userstr = localStorage.getItem("userdata");
   let user = JSON.parse(userstr);
+  console.log(user);
   const addforum = () => {
     window.scrollTo({
       top: document.body.scrollHeight,
@@ -59,8 +60,9 @@ export default function Forum() {
     console.log(values);
     AddforumApi({
       forum_title: values.title,
-      forum_writer: user.nickname,
+      nickname: user.nickname,
       forum_body: values.forum,
+      username:user.username
     })
       .then((res) => {
         message.success("发布成功");
@@ -77,7 +79,7 @@ export default function Forum() {
     const e_id = e.forum_id;
     GetforumlistApi({ forum_id: e_id })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         navigate("/post", { state: res.data.data });
       })
       .catch((err) => {});
