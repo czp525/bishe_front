@@ -105,7 +105,6 @@ export const GetquestionApi = (params) =>
   request.post("/my/exam/question", params);
 //提交答案
 export const AddanswerApi = async (params) => {
-
   const ans = await request.post("/my/exam/submitexam", params);
   if (ans.status > 400) {
     return {err: ans}

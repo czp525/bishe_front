@@ -9,10 +9,11 @@
   border-bottom-right-radius: 1rem;
   width: 220px;
   box-shadow: 0px 0px 20px grey;
-  margin-top:40px;
+  margin-top:50px;
   margin-bottom:10px;
   background-color:#fff;
   overflow: hidden;
+  height: 600px;
 }
 .sidermenu {
   height: auto;
@@ -26,7 +27,7 @@
 }
 .item {
   flex: 1;
-  margin: 80px 10px !important;
+  margin: 75px 10px !important;
   width: calc(100% - 20px);
   box-shadow: 0 0 10px rgb(187, 187, 187);
   border-top-left-radius: 20px;
