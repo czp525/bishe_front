@@ -104,15 +104,28 @@ export const GetexamApi = (params) =>
 export const GetquestionApi = (params) =>
   request.post("/my/exam/question", params);
 //提交答案
-export const AddanswerApi = (params) =>
-  request.post("/my/exam/submitexam", params);
+export const AddanswerApi = async (params) => {
 
+  const ans = await request.post("/my/exam/submitexam", params);
+  if (ans.status > 400) {
+    return {err: ans}
+  } else {
+    return ans.data;
+  }
+}
 //删除试题
 export const DeleteexamApi = (params) =>
   request.post("/my/exam/deleteexam", params);
 
 //获取成绩
-export const GetgradeApi = (params) => request.post("/my/exam/garde", params);
+export const GetgradeApi = async (params) => {
+  const ans = await request.post("/my/exam/garde", params);
+  if (ans.status > 400) {
+    return {err: ans}
+  } else {
+    return ans.data;
+  }
+}
 //获取答题详情
 export const GettestdetailApi = (params) =>
   request.post("/my/exam/examresult", params);

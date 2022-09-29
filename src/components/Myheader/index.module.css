@@ -1,4 +1,6 @@
 .header {
+  position: fixed;
+  top: 0;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -9,11 +11,14 @@
   /* border-bottom:solid; */
   box-shadow:2px 2px 5px grey;
   margin-bottom: 10px;
+  z-index: 1000;
+  transition: .4s;
 }
 .icon {
   width: 120px;
   height: 80px;
   margin:10px;
+  transition: .4s;
 }
 .iconbox{
   height: 100%;
@@ -26,18 +31,20 @@
 .search {
   width: 580px;
   margin: auto 0;
+  outline: none;
+  border: none !important;
+}
+.search button {
+  border: 0;
 }
 .headerR {
-  width: 250px;
+  width: 190px;
   display: flex;
   align-items: center;
 }
 /* .avatar {
   display: inline-block;
   margin: 0px 10px 0px 300px;
-} */
-/* .menu {
-  flex: 1;
 } */
 .userdrop {
   font-size: 18px;
@@ -47,5 +54,21 @@
 }
 .right {
   font-size: 20px;
-margin: auto 10px auto 0;
+  margin: auto 10px auto 0;
+}
+
+.small.header {
+  height: 70px;
+  background-color: rgb(192, 137, 255);
+}
+
+.small .icon {
+  width: 84px;
+  height: 56px;
+  margin-left: 44px;
+}
+.small .search button {
+  background-color: rgb(207, 207, 255);
+  border: 0;
+  color: #000000;
 }

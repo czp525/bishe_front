@@ -12,59 +12,21 @@ import styles from "./index.module.css";
 
 export default function Mysider() {
   const navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(false);
   const handleClick = (e) => {
     navigate("/" + e.key);
   };
-  // const toggleCollapsed = () => {
-  //   setCollapsed(!collapsed);
-  // };
 
   return (
-    <div
-      style={{
-        width: 200,
-        boxShadow: "2px 2px 5px grey",
-        // marginLeft:"100px",
-        marginTop:'40px',
-        marginBottom:"10px",
-        backgroundColor:'#fff'
-      }}
-    >
-      {/* <Button
-        type="primary"
-        onClick={toggleCollapsed}
-        style={{
-          margin: "0px 0px 50px 0px",
-        }}
-      >
-        {collapsed ? (
-          <MenuUnfoldOutlined style={{ fontSize: "20px" }} />
-        ) : (
-          <MenuFoldOutlined style={{ fontSize: "20px" }} />
-        )}
-      </Button> */}
+    <div className={styles["side-wrapper"]}>
       <Menu
         className={styles.sidermenu}
         onClick={handleClick}
         defaultSelectedKeys={[""]}
-        // defaultOpenKeys={["sub1"]}
         mode="inline"
         theme="light"
-        // inlineCollapsed={collapsed}
-        // items={items}
-
-        style={{
-          fontSize: "20px",
-          textAlign: "center",
-          flex: 1,
-          display: "flex",
-          flexFlow: "column",
-          // padding: "20px",
-          // justifyContent: "space-between",
-        }}
       >
         <Menu.Item
+          className={styles.item}
           key="courses/videolesson"
           icon={
             <PieChartOutlined
@@ -74,29 +36,28 @@ export default function Mysider() {
               }}
             />
           }
-          style={{ margin: "30px 0px" }}
         >
           课程
         </Menu.Item>
         <Menu.Item
+          className={styles.item}
           key="forum"
           icon={
             <DesktopOutlined
               style={{ fontSize: "20px", textAlign: "center" }}
             />
           }
-          style={{ margin: "30px 0px" }}
         >
           论坛
         </Menu.Item>
         <Menu.Item
+          className={styles.item}
           key="training"
           icon={
             <ContainerOutlined
               style={{ fontSize: "20px", textAlign: "center" }}
             />
           }
-          style={{ margin: "30px 0px" }}
         >
           训练营
         </Menu.Item>

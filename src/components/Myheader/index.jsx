@@ -9,12 +9,16 @@ import { SearchApi } from "../../request/api";
 
 
 export default function Myheader(props) {
-  console.log(props);
   const navigate = useNavigate();
   const location = useLocation();
   const { Search } = Input;
   const { setdata } = props;
-  const [total, setTotal] = useState(0);
+  const [ showSmall, setShowSmall ] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setShowSmall(document.documentElement.scrollTop > 300);
+    })
+  }, [])
   const onSearch = (value) => {
     const getData = (c) => {
       SearchApi({ value: value, current: c })
@@ -22,7 +26,6 @@ export default function Myheader(props) {
           let a = [...res.data.data, ...res.data.data1];
           console.log(a);
           setdata(a);
-          setTotal(res.data.total);
         })
         .catch((err) => {});
     };
@@ -78,7 +81,7 @@ export default function Myheader(props) {
     navigate("/personal");
   }
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${showSmall && styles.small}`}>
       <div className={styles.iconbox}>
         <img
           src="../icon.png"

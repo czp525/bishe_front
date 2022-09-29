@@ -40,25 +40,18 @@ export default function Question() {
     setIsModalOpen(false);
   };
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     // console.log("Received values of form: ", values);
     if (values) {
-      AddanswerApi({
+      const params = {
         exam_id: state.exam_id,
         username: user.username,
         values: values,
-      })
-        .then((res) => {
-          console.log(res);
-       GetgradeApi({ exam_id: state.exam_id, username: user.username })
-            .then((res) => {
-              console.log(res);
-              setGrade(res.data.garde);
-              setIsModalOpen(true);
-            })
-            .catch((err) => {});
-        })
-        .catch((err) => {});
+      };
+      await AddanswerApi(params);
+      const res = await GetgradeApi(params);
+      setGrade(res.garde);
+      setIsModalOpen(true);
     }
   };
 

@@ -14,11 +14,11 @@
   /* display: -webkit-flex; */
     box-shadow:2px 2px 2px grey;
 }
-img{
+img {
   flex: 1;
   width: 48%;
   height: 48%;
-  margin: 5px;
+  /* margin: 5px; */
   border-radius: 10px;
 }
 .box{
@@ -29,4 +29,36 @@ img{
   /* height: 100vh; */
   margin: auto;
   background-color: #fbfcfd;
+}
+.titleBtn {
+  height: 40px;
+  margin-bottom: 30px;
+  width: 100%;
+  text-align: left;
+  border-bottom: 2px solid rgb(0, 166, 255);
+}
+.titleBtn span {
+  font-size: 25px;
+}
+.item {
+  border-radius: 10px;
+  background-color: #fff;
+  height: 200px;
+  overflow: hidden;
+  box-shadow: 0 0px 5px 0 rgb(135, 148, 162);
+  padding: .5rem !important;
+  transition: 0.2s;
+}
+.item:hover {
+  transition: .4s;
+  transform: scale(1.05);
+}
+.img {
+  margin-top: 20px;
+  width: 200px;
+  height: 120px;
+}
+
+.sideItem:hover span {
+  color: rgb(95, 63, 157);
 }

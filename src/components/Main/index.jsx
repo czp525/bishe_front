@@ -97,7 +97,7 @@ export default function Main() {
             <div>
               <Button
                 type="link"
-                style={{ fontSize: "25px", marginBottom: "30px" }}
+                className={styles.titleBtn}
                 onClick={toArticlelesson}
               >
                 文章课程{" >"}
@@ -106,17 +106,15 @@ export default function Main() {
 
             <List
               grid={{
-                gutter: 16,
+                gutter: 30,
                 column: 2,
               }}
               dataSource={articlesrc}
               renderItem={(item) => (
                 <List.Item
-                  style={{
-                    borderRadius: "10px",
-                    backgroundColor: "#fff",
-                    height: "200px",
-                    overflow: "hidden",
+                  className={styles.item}
+                  onClick={() => {
+                    articleclick(item);
                   }}
                 >
                   <List.Item.Meta
@@ -124,17 +122,11 @@ export default function Main() {
                       <img
                         src={item.article_pic}
                         alt=""
-                        style={{ width: "200px", height: "120px" }}
+                        className={styles.img}
                       />
                     }
                     title={
-                      <Button
-                        type="link"
-                        onClick={() => {
-                          articleclick(item);
-                        }}
-                        style={{ fontSize: "20px" }}
-                      >
+                      <Button type="link" style={{ fontSize: "20px" }}>
                         {item.title}
                       </Button>
                     }
@@ -151,8 +143,8 @@ export default function Main() {
                       >
                         {item.author}
                         <br />
-                        {item.article_introduce.length > 75
-                          ? `${item.article_introduce.slice(0, 75)}...`
+                        {item.article_introduce.length > 70
+                          ? `${item.article_introduce.slice(0, 70)}...`
                           : item.article_introduce}
                       </div>
                     }
@@ -177,7 +169,7 @@ export default function Main() {
               })}
             </div> */}
           </div>
-          <div className="charts">
+          <div className={styles.charts}>
             <p
               style={{
                 fontSize: "20px",
@@ -193,7 +185,7 @@ export default function Main() {
               bordered
               dataSource={articledata}
               renderItem={(item) => (
-                <List.Item style={{ backgroundColor: "#fff" }}>
+                <List.Item className={styles.sideItem}>
                   <Button
                     type="link"
                     onClick={() => {
@@ -213,7 +205,7 @@ export default function Main() {
             <div>
               <Button
                 type="link"
-                style={{ fontSize: "25px ", marginBottom: "30px" }}
+                className={styles.titleBtn}
                 onClick={toVideolesson}
               >
                 视频课程{" >"}
@@ -222,35 +214,23 @@ export default function Main() {
 
             <List
               grid={{
-                gutter: 16,
+                gutter: 30,
                 column: 2,
               }}
               dataSource={videosrc}
               renderItem={(item) => (
                 <List.Item
-                  style={{
-                    borderRadius: "10px",
-                    backgroundColor: "#fff",
-                    height: "200px",
-                    overflow: "hidden",
+                  className={styles.item}
+                  onClick={() => {
+                    videoclick(item);
                   }}
                 >
                   <List.Item.Meta
                     avatar={
-                      <img
-                        src={item.video_pic}
-                        alt=""
-                        style={{ width: "200px", height: "120px" }}
-                      />
+                      <img src={item.video_pic} alt="" className={styles.img} />
                     }
                     title={
-                      <Button
-                        type="link"
-                        onClick={() => {
-                          videoclick(item);
-                        }}
-                        style={{ fontSize: "20px" }}
-                      >
+                      <Button type="link" style={{ fontSize: "20px" }}>
                         {item.title}
                       </Button>
                     }
@@ -259,8 +239,8 @@ export default function Main() {
                         {item.author}
                         <br />
 
-                        {item.video_introduce.length > 75
-                          ? `${item.video_introduce.slice(0, 75)}...`
+                        {item.video_introduce.length > 70
+                          ? `${item.video_introduce.slice(0, 70)}...`
                           : item.video_introduce}
                       </div>
                     }
@@ -284,7 +264,7 @@ export default function Main() {
               })}
             </div> */}
           </div>
-          <div className="charts">
+          <div className={styles.charts}>
             <p
               style={{
                 fontSize: "20px",
@@ -299,7 +279,7 @@ export default function Main() {
               bordered
               dataSource={videodata}
               renderItem={(item) => (
-                <List.Item style={{ backgroundColor: "#fff" }}>
+                <List.Item className={styles.sideItem}>
                   <Button
                     type="link"
                     onClick={() => {

@@ -69,7 +69,7 @@ export default function Mycarousel() {
               <img
                 src={item.article_pic}
                 alt=""
-                style={{ height: "600px", width: "900px" }}
+                className={styles.img}
                 onClick={() => {
                   handleclick(item);
                 }}
@@ -83,7 +83,7 @@ export default function Mycarousel() {
               <img
                 src={item.video_pic}
                 alt=""
-                style={{ height: "600px", width: "900px" }}
+                className={styles.img}
                 onClick={() => {
                   handleclick(item);
                 }}
