@@ -54,7 +54,7 @@ export default function Editvideo() {
   };
   const props = {
     name: "file",
-    action: "http://10.2.13.142:8088/uploadFile",
+    action: "http://10.2.13.113:8088/uploadFile",
     onChange(info) {
       if (info.file.status !== "uploading") {
       }

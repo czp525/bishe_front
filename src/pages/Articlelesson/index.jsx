@@ -31,7 +31,7 @@ export default function Videolesson() {
     const e_id = e.article_id;
     axios({
       method: "get",
-      url: `http://10.2.13.142:8088/my/article/changearticle/${e_id}`,
+      url: `http://10.2.13.113:8088/my/article/changearticle/${e_id}`,
       data: {
         article_id: e_id,
       },

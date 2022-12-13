@@ -57,7 +57,7 @@ export default function Main() {
         const e_id = e.article_id;
         axios({
           method: "get",
-          url: `http://10.2.13.142:8088/my/article/changearticle/${e_id}`,
+          url: `http://10.2.13.113:8088/my/article/changearticle/${e_id}`,
           data: {
             article_id: e_id,
           },
@@ -75,7 +75,7 @@ export default function Main() {
         const e_id = e.video_id;
         axios({
           method: "get",
-          url: `http://10.2.13.142:8088/my/video/changevideo1/${e_id}`,
+          url: `http://10.2.13.113:8088/my/video/changevideo1/${e_id}`,
           data: {
             video_id: e_id,
           },

@@ -37,7 +37,7 @@ export default function Articlemanage() {
     GetarticleApi({ current: c })
       // axios({
       //   method: "get",
-      //   url: "http://10.2.13.142:8088/my/article/articles",
+      //   url: "http://10.2.13.113:8088/my/article/articles",
       //   params: { current: c },
       //   headers: {
       //     authorization: managertokenstr,
@@ -58,7 +58,7 @@ export default function Articlemanage() {
     if (window.confirm("确定要删除吗")) {
       axios({
         method: "get",
-        url: `http://10.2.13.142:8088/my/article/deletearticle/${d_id}`,
+        url: `http://10.2.13.113:8088/my/article/deletearticle/${d_id}`,
         headers: {
           authorization: managertokenstr,
         },
@@ -77,7 +77,7 @@ export default function Articlemanage() {
     const e_id = e.article_id;
     axios({
       method: "get",
-      url: `http://10.2.13.142:8088/my/article/changearticle/${e_id}`,
+      url: `http://10.2.13.113:8088/my/article/changearticle/${e_id}`,
       data: {
         article_id: e_id,
       },
